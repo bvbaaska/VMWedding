@@ -617,9 +617,69 @@
       font-size: clamp(.62rem,2vw,.72rem);
       letter-spacing: .15em; text-transform: uppercase; color: var(--grey);
     }
+
+    /* ══════════════════════════════════════════
+       КНОПКА ЗВУКА (фиксированная)
+    ══════════════════════════════════════════ */
+    .sound-toggle {
+      position: fixed;
+      top: 16px; right: 16px;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: rgba(123,26,58,.9);
+      border: none;
+      cursor: pointer;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+      transition: transform .2s, background .2s;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+    /* центрируем относительно карточки на десктопе */
+    @media (min-width: 481px) {
+      .sound-toggle {
+        right: max(16px, calc(50% - 240px + 16px));
+      }
+    }
+    .sound-toggle:hover { transform: scale(1.08); background: var(--burgundy); }
+    .sound-toggle:active { transform: scale(.94); }
+    .sound-toggle svg { width: 20px; height: 20px; fill: #fff; }
+    .sound-toggle .icon-off { display: none; }
+    .sound-toggle.muted .icon-on  { display: none; }
+    .sound-toggle.muted .icon-off { display: block; }
+
+    /* пульсация когда играет */
+    .sound-toggle.playing::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(123,26,58,.4);
+      animation: soundPulse 1.8s ease-out infinite;
+    }
+    @keyframes soundPulse {
+      0%   { transform: scale(1);   opacity: .7; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
   </style>
 </head>
 <body>
+
+<!-- ════ ФОНОВАЯ МУЗЫКА ════ -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="music/marry-you.mp3" type="audio/mpeg" />
+</audio>
+
+<!-- Кнопка вкл/выкл звука -->
+<button class="sound-toggle muted" id="soundToggle" aria-label="Звук" title="Музыка">
+  <!-- иконка звук вкл -->
+  <svg class="icon-on" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/></svg>
+  <!-- иконка звук выкл -->
+  <svg class="icon-off" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.59 3 2.7-2.7-1.42-1.42-2.7 2.71-2.7-2.71-1.42 1.42 2.71 2.7-2.71 2.7 1.42 1.42 2.7-2.71 2.7 2.71 1.42-1.42-2.71-2.7z"/></svg>
+</button>
 
 <!-- ════ HERO ════ -->
 <section class="hero">
@@ -893,6 +953,44 @@ function submitForm(e) {
     document.getElementById('formSuccess').classList.add('show');
   }, 600);
 }
+
+/* ═══════════════════════════════════════
+   ФОНОВАЯ МУЗЫКА
+═══════════════════════════════════════ */
+const music  = document.getElementById('bgMusic');
+const sndBtn = document.getElementById('soundToggle');
+music.volume = 0.45;
+
+function playMusic() {
+  music.play().then(() => {
+    sndBtn.classList.remove('muted');
+    sndBtn.classList.add('playing');
+  }).catch(() => {/* браузер заблокировал — ждём клика */});
+}
+function pauseMusic() {
+  music.pause();
+  sndBtn.classList.add('muted');
+  sndBtn.classList.remove('playing');
+}
+
+/* клик по кнопке */
+sndBtn.addEventListener('click', () => {
+  music.paused ? playMusic() : pauseMusic();
+});
+
+/* пытаемся запустить при первом касании страницы (autoplay-политика) */
+let started = false;
+function tryAutoStart() {
+  if (started) return;
+  started = true;
+  playMusic();
+  document.removeEventListener('click', tryAutoStart);
+  document.removeEventListener('touchstart', tryAutoStart);
+  document.removeEventListener('scroll', tryAutoStart);
+}
+document.addEventListener('click', tryAutoStart, { once: false });
+document.addEventListener('touchstart', tryAutoStart, { once: false });
+document.addEventListener('scroll', tryAutoStart, { once: false });
 </script>
 </body>
 </html>
