@@ -302,8 +302,11 @@
       box-shadow: 0 8px 24px rgba(0,0,0,.18);
     }
     .swatch-label {
-      font-size: clamp(.55rem,1.8vw,.67rem);
-      color: var(--grey);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(.78rem,2.6vw,.95rem);
+      color: #8A6F5E;
+      letter-spacing: .01em;
     }
 
     /* ══════════════════════════════════════════
@@ -677,29 +680,8 @@
   <a href="https://yandex.ru/maps/?text=Якутск+ул.+50+лет+Советской+Армии+1а" target="_blank" class="btn-map reveal delay-3">Посмотреть на карте</a>
 </section>
 
-<!-- ════ ДРЕСС-КОД ════ -->
-<section>
-  <div class="dresscode-wrap">
-    <img class="dresscode-photo reveal-scale" src="images/dresscode.jpg" alt="Дресс-код" />
-  </div>
-  <div class="dresscode-content">
-    <p class="section-script reveal">Дресс-код</p>
-    <p class="dresscode-text reveal delay-1">Мы будем рады, если вы поддержите<br/>цветовую палитру нашей свадьбы</p>
-    <div class="palette">
-      <div class="swatch reveal delay-1"><div class="swatch-circle" style="background:#8B9B5A;"></div><span class="swatch-label">olive</span></div>
-      <div class="swatch reveal delay-2"><div class="swatch-circle" style="background:#5C6B35;"></div><span class="swatch-label">deep olive</span></div>
-      <div class="swatch reveal delay-3"><div class="swatch-circle" style="background:#3D2B1F;"></div><span class="swatch-label">chocolite</span></div>
-      <div class="swatch reveal delay-4"><div class="swatch-circle" style="background:#F0EAD8;border:1px solid #D4C8BA;"></div><span class="swatch-label">cream</span></div>
-      <div class="swatch reveal delay-5"><div class="swatch-circle" style="background:#C47A80;"></div><span class="swatch-label">dusty rose</span></div>
-      <div class="swatch reveal delay-6"><div class="swatch-circle" style="background:#6B1E3C;"></div><span class="swatch-label">burgundy</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ════ КАРУСЕЛЬ ════ -->
+<!-- ════ ДРЕСС-КОД (с каруселью вместо фото) ════ -->
 <section class="carousel-section">
-  <p class="section-script reveal">Наши моменты</p>
-
   <div class="carousel-track-wrap" id="carouselWrap">
     <div class="carousel-track" id="carouselTrack">
       <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in;" /></div>
@@ -719,6 +701,19 @@
   <div class="carousel-arrows">
     <button class="carousel-btn" onclick="prev()" aria-label="Назад">&#8592;</button>
     <button class="carousel-btn" onclick="next()" aria-label="Вперёд">&#8594;</button>
+  </div>
+
+  <div class="dresscode-content">
+    <p class="section-script reveal">Дресс-код</p>
+    <p class="dresscode-text reveal delay-1">Мы будем рады, если вы поддержите<br/>цветовую палитру нашей свадьбы</p>
+    <div class="palette">
+      <div class="swatch reveal delay-1"><div class="swatch-circle" style="background:#8B9B5A;"></div><span class="swatch-label">olive</span></div>
+      <div class="swatch reveal delay-2"><div class="swatch-circle" style="background:#5C6B35;"></div><span class="swatch-label">deep olive</span></div>
+      <div class="swatch reveal delay-3"><div class="swatch-circle" style="background:#3D2B1F;"></div><span class="swatch-label">chocolate</span></div>
+      <div class="swatch reveal delay-4"><div class="swatch-circle" style="background:#F0EAD8;border:1px solid #D4C8BA;"></div><span class="swatch-label">cream</span></div>
+      <div class="swatch reveal delay-5"><div class="swatch-circle" style="background:#C47A80;"></div><span class="swatch-label">dusty rose</span></div>
+      <div class="swatch reveal delay-6"><div class="swatch-circle" style="background:#6B1E3C;"></div><span class="swatch-label">burgundy</span></div>
+    </div>
   </div>
 </section>
 
