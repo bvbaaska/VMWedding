@@ -273,7 +273,10 @@
       font-family: var(--font-head);
       font-size: clamp(2.1rem,8vw,3rem);
       color: var(--burgundy);
+      line-height: 1.4;          /* запас для росчерков Marianna */
+      padding: 0 .25em;          /* чтобы буква Д не обрезалась по краям */
       margin-bottom: clamp(14px,4vw,22px);
+      overflow: visible;
     }
     .program-photo-wrap {
       position: relative;
@@ -375,7 +378,7 @@
     .dresscode-wrap:hover .dresscode-photo { transform: scale(1.03); }
     .dresscode-content {
       background: var(--cream);
-      margin-top: clamp(24px,7vw,40px);   /* отступ от фото галереи */
+      margin-top: clamp(34px,9vw,52px);   /* больше отступ от фото галереи */
       padding: clamp(24px,6vw,36px) clamp(16px,5vw,24px) clamp(32px,8vw,48px);
       text-align: center;
     }
@@ -1060,7 +1063,7 @@
 <section class="carousel-section">
   <div class="carousel-track-wrap" id="carouselWrap">
     <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in; object-position: calc(50% - 7px) center;" /></div>
+      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in; object-position: calc(50% - 3px) center;" /></div>
       <div class="carousel-slide"><img src="images/gallery2.jpg" alt="Фото 2" onclick="openLightbox(1)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery3.jpg" alt="Фото 3" onclick="openLightbox(2)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery4.jpg" alt="Фото 4" onclick="openLightbox(3)" style="cursor:zoom-in;" /></div>
