@@ -166,6 +166,10 @@
       text-align: right;         /* «Василий» прижат вправо под «Мариясена» */
       padding-left: clamp(6px,3vw,18px);
     }
+    .hero-names .name-2 {
+      display: inline-block;
+      transform: translateX(40px);   /* доп. сдвиг «Василий» вправо */
+    }
     /* обёртка фото — обрезает нижнюю чёрную полоску + alpha-маска углов */
     .hero-photo-wrap {
       position: relative;
@@ -174,13 +178,13 @@
       aspect-ratio: 3/4;
       overflow: hidden;
       border-radius: clamp(10px,4vw,24px);
-      /* выразительная виньетка с растворением краёв в фон */
+      /* сильное круговое растворение краёв в фон — выделяет пару */
       -webkit-mask-image:
-        radial-gradient(ellipse 86% 88% at 50% 46%,
-          #000 42%, rgba(0,0,0,.65) 70%, rgba(0,0,0,0) 100%);
+        radial-gradient(ellipse 78% 82% at 50% 45%,
+          #000 18%, rgba(0,0,0,.6) 48%, rgba(0,0,0,.25) 74%, rgba(0,0,0,0) 100%);
       mask-image:
-        radial-gradient(ellipse 86% 88% at 50% 46%,
-          #000 42%, rgba(0,0,0,.65) 70%, rgba(0,0,0,0) 100%);
+        radial-gradient(ellipse 78% 82% at 50% 45%,
+          #000 18%, rgba(0,0,0,.6) 48%, rgba(0,0,0,.25) 74%, rgba(0,0,0,0) 100%);
       -webkit-mask-repeat: no-repeat;
       mask-repeat: no-repeat;
     }
@@ -196,7 +200,7 @@
 
     .hero-subtitle {
       font-family: var(--font-head);
-      font-size: clamp(1.5rem,6vw,2rem);
+      font-size: clamp(2.1rem,8vw,3rem);
       color: var(--burgundy);
       margin: clamp(12px,4vw,20px) 0 clamp(10px,3vw,14px);
     }
@@ -1004,7 +1008,7 @@
   <!-- Рисунок двух рук с сердцем -->
   <img class="deco-hands" src="images/hands.png" alt="" aria-hidden="true" />
 
-  <h1 class="hero-names reveal">Мариясена<br/>Василий</h1>
+  <h1 class="hero-names reveal">Мариясена<br/><span class="name-2">Василий</span></h1>
   <div class="hero-photo-wrap reveal-scale delay-2">
     <img class="hero-photo" src="images/hero.jpg" alt="Мариясена и Василий" />
   </div>
@@ -1056,7 +1060,7 @@
 <section class="carousel-section">
   <div class="carousel-track-wrap" id="carouselWrap">
     <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in; object-position: calc(50% - 10px) center;" /></div>
+      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in; object-position: calc(50% - 7px) center;" /></div>
       <div class="carousel-slide"><img src="images/gallery2.jpg" alt="Фото 2" onclick="openLightbox(1)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery3.jpg" alt="Фото 3" onclick="openLightbox(2)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery4.jpg" alt="Фото 4" onclick="openLightbox(3)" style="cursor:zoom-in;" /></div>
@@ -1269,15 +1273,43 @@ document.querySelectorAll('.radio-opt').forEach(opt => {
   });
 });
 
-function submitForm(e) {
+/* Адрес бэкенда (см. backend/README.md). Пусто = демо-режим без отправки. */
+const RSVP_ENDPOINT = "";
+
+async function submitForm(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('.btn-submit');
-  btn.textContent = '✓ Отправлено';
-  btn.style.background = '#4A7C4A';
-  setTimeout(() => {
-    document.getElementById('rsvpForm').style.display = 'none';
-    document.getElementById('formSuccess').classList.add('show');
-  }, 600);
+  const form = document.getElementById('rsvpForm');
+  const btn = form.querySelector('.btn-submit');
+  const fd = new FormData(form);
+  const payload = {
+    name: (fd.get('name') || '').trim(),
+    attendance: fd.get('attendance') || '',
+    comment: (fd.get('comment') || '').trim(),
+  };
+
+  btn.disabled = true;
+  btn.textContent = 'Отправляем…';
+
+  try {
+    if (RSVP_ENDPOINT) {
+      const res = await fetch(RSVP_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('bad response');
+    }
+    btn.textContent = '✓ Отправлено';
+    btn.style.background = '#4A7C4A';
+    setTimeout(() => {
+      form.style.display = 'none';
+      document.getElementById('formSuccess').classList.add('show');
+    }, 500);
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Попробовать ещё раз';
+    btn.style.background = '#9b2740';
+  }
 }
 
 /* ═══════════════════════════════════════
