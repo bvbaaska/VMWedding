@@ -54,7 +54,7 @@
 
     /* Заголовки на Marianna остаются прямыми (курсив только у Vollkorn) */
     .hero-names, .hero-subtitle, .cal-row.nums span, .cal-month,
-    .section-script, .sched-time, .this-is-love span, .venue-name,
+    .section-script, .sched-time, .this-is-love span,
     .details-title, .detail-block h3, .form-success p,
     .footer-heading, .contact-name, .contact-phone {
       font-style: normal;
@@ -170,7 +170,7 @@
       text-align: center;
     }
     .cal-row.days span {
-      font-size: clamp(.55rem,2vw,.7rem);
+      font-size: clamp(.66rem,2.3vw,.82rem);
       font-weight: 500;
       padding-bottom: 4px;
       letter-spacing: .02em;
@@ -200,7 +200,7 @@
       margin-top: 2px;
     }
     .hero-invite {
-      font-size: clamp(.68rem,2.5vw,.82rem);
+      font-size: clamp(.88rem,3vw,1.02rem);
       line-height: 1.75;
       margin-top: clamp(14px,4vw,22px);
     }
@@ -215,7 +215,7 @@
     }
     .section-script {
       font-family: var(--font-head);
-      font-size: clamp(1.8rem,7vw,2.6rem);
+      font-size: clamp(2.1rem,8vw,3rem);
       color: var(--burgundy);
       margin-bottom: clamp(14px,4vw,22px);
     }
@@ -226,8 +226,8 @@
     }
     .program-photo {
       width: 100%; display: block;
-      aspect-ratio: 3/4;
-      object-fit: cover; object-position: center top;
+      aspect-ratio: 4/3;
+      object-fit: cover; object-position: center center;
       filter: grayscale(25%) brightness(.82);
       transition: transform 1.2s cubic-bezier(.22,.61,.36,1);
     }
@@ -248,13 +248,13 @@
     .sched-row.visible { opacity: 1; transform: translateX(0); }
     .sched-time {
       font-family: var(--font-head);
-      font-size: clamp(1.1rem,4.5vw,1.6rem);
+      font-size: clamp(1.5rem,6vw,2.1rem);
       color: rgba(255,255,255,.92);
       font-style: italic;
-      min-width: clamp(48px,13vw,68px);
+      min-width: clamp(64px,16vw,92px);
     }
     .sched-event {
-      font-size: clamp(.58rem,2vw,.75rem);
+      font-size: clamp(.74rem,2.6vw,.92rem);
       font-weight: 500;
       letter-spacing: .12em;
       color: rgba(255,255,255,.92);
@@ -287,19 +287,19 @@
       text-align: center;
     }
     .venue-name {
-      font-family: var(--font-head);
-      font-size: clamp(.95rem,3.5vw,1.1rem);
-      font-weight: 500; margin-bottom: 6px;
+      font-family: var(--font-body);
+      font-size: clamp(1rem,3.5vw,1.18rem);
+      font-weight: 600; margin-bottom: 6px;
     }
     .venue-address {
-      font-size: clamp(.75rem,2.8vw,.88rem);
+      font-size: clamp(.92rem,3vw,1.05rem);
       line-height: 1.65;
       margin-bottom: clamp(16px,5vw,24px);
     }
     .btn-map {
       display: inline-block;
       background: var(--burgundy); color: #fff;
-      font-size: clamp(.72rem,2.5vw,.82rem);
+      font-size: clamp(.9rem,3vw,1.02rem);
       font-weight: 400; letter-spacing: .04em;
       padding: clamp(11px,3vw,14px) clamp(28px,8vw,40px);
       border-radius: 50px; text-decoration: none;
@@ -325,7 +325,7 @@
       text-align: center;
     }
     .dresscode-text {
-      font-size: clamp(.72rem,2.5vw,.85rem);
+      font-size: clamp(.92rem,3vw,1.06rem);
       line-height: 1.7;
       margin-bottom: clamp(20px,5vw,30px);
     }
@@ -349,9 +349,9 @@
     }
     .swatch-label {
       font-family: var(--font-head);
-      font-style: italic;
-      font-size: clamp(.78rem,2.6vw,.95rem);
-      color: #8A6F5E;
+      font-style: normal;
+      font-size: clamp(1rem,3.4vw,1.3rem);
+      color: var(--burgundy);
       letter-spacing: .01em;
     }
 
@@ -502,11 +502,12 @@
     .detail-block:last-child { margin-bottom: 0; }
     .detail-block h3 {
       font-family: var(--font-head);
-      font-size: clamp(.95rem,3.5vw,1.1rem);
-      font-weight: 500; margin-bottom: 6px;
+      font-size: clamp(1.4rem,5vw,1.7rem);
+      font-weight: 500; margin-bottom: 8px;
+      color: var(--burgundy);
     }
     .detail-block p {
-      font-size: clamp(.72rem,2.5vw,.82rem);
+      font-size: clamp(.9rem,3vw,1.02rem);
       line-height: 1.78;
     }
 
@@ -519,7 +520,7 @@
       text-align: center;
     }
     .rsvp-subtitle {
-      font-size: clamp(.72rem,2.5vw,.83rem);
+      font-size: clamp(.9rem,3vw,1.04rem);
       line-height: 1.75;
       margin-bottom: clamp(24px,6vw,36px);
     }
@@ -527,7 +528,7 @@
     .form-block { margin-bottom: clamp(14px,4vw,20px); }
     .form-label {
       display: block;
-      font-size: clamp(.72rem,2.5vw,.82rem);
+      font-size: clamp(.9rem,3vw,1.02rem);
       margin-bottom: 8px;
     }
     .form-input, .form-textarea {
@@ -536,7 +537,7 @@
       border-radius: clamp(8px,3vw,14px);
       padding: clamp(11px,3vw,15px) clamp(12px,4vw,18px);
       font-family: var(--font-body);
-      font-size: clamp(.78rem,2.8vw,.88rem);
+      font-size: clamp(.92rem,3vw,1.05rem);
       font-weight: 400; color: var(--text);
       outline: none;
       transition: border-color .25s, box-shadow .25s;
@@ -546,7 +547,7 @@
       box-shadow: 0 0 0 3px rgba(123,26,58,.08);
     }
     .form-textarea { resize: none; min-height: 54px; }
-    .attendance-q { font-size: clamp(.72rem,2.5vw,.82rem); margin-bottom: 10px; }
+    .attendance-q { font-size: clamp(.9rem,3vw,1.02rem); margin-bottom: 10px; }
     .radio-box {
       background: #fff;
       border: 1.5px solid #D4C8BA;
@@ -557,7 +558,7 @@
     .radio-opt {
       display: flex; align-items: center;
       gap: clamp(8px,2.5vw,12px);
-      font-size: clamp(.72rem,2.5vw,.82rem);
+      font-size: clamp(.9rem,3vw,1.02rem);
       padding: clamp(6px,2vw,9px) 0;
       cursor: pointer;
       border-bottom: 1px solid #EDE4D8;
@@ -693,7 +694,7 @@
     }
     .sound-toggle:hover { transform: scale(1.08); background: #8e1f44; }
     .sound-toggle:active { filter: brightness(.92); }
-    .sound-toggle svg { width: 23px; height: 23px; fill: #fff; }
+    .sound-toggle svg { width: 24px; height: 24px; }
     .sound-toggle .icon-off { display: none; }
     .sound-toggle.muted .icon-on  { display: none; }
     .sound-toggle.muted .icon-off { display: block; }
@@ -792,13 +793,34 @@
       .sched-time { font-size: clamp(1.8rem,2.6vw,2.6rem); }
       .sched-event { font-size: clamp(.85rem,1.1vw,1rem); }
 
-      /* — КАРУСЕЛЬ / ДРЕСС-КОД — */
-      .carousel-track-wrap { max-width: 520px; margin: 0 auto; border-radius: 8px; }
-      .carousel-slide img { border-radius: 10px; }
-      .dresscode-content { max-width: 720px; margin: 0 auto; }
-      .palette { max-width: 560px; gap: 28px 24px; }
-      .swatch-circle { width: 84px; height: 84px; }
-      .swatch-label { font-size: 1.05rem; }
+      /* — ГАЛЕРЕЯ: сетка 2×2 крупными фото вместо карусели — */
+      .carousel-track-wrap {
+        max-width: 1000px; margin: 0 auto;
+        overflow: visible; cursor: default;
+      }
+      .carousel-track {
+        transform: none !important;   /* перебиваем inline-стиль карусели */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(16px,2vw,28px);
+      }
+      .carousel-slide {
+        flex: none; width: auto; padding: 0;
+        pointer-events: auto;
+      }
+      .carousel-slide img {
+        aspect-ratio: 3/4;
+        border-radius: 12px;
+        pointer-events: auto;
+        box-shadow: 0 14px 40px rgba(42,21,21,.16);
+      }
+      .carousel-dots, .carousel-arrows { display: none; }
+
+      /* — ДРЕСС-КОД — */
+      .dresscode-content { max-width: 760px; margin: 0 auto; }
+      .palette { max-width: 620px; gap: 32px 28px; }
+      .swatch-circle { width: 96px; height: 96px; }
+      .swatch-label { font-size: 1.35rem; }
 
       /* — ДЕТАЛИ: контент по центру, в 3 колонки — */
       .details-bg { object-position: center 30%; }
@@ -843,10 +865,17 @@
 
 <!-- Кнопка вкл/выкл звука -->
 <button class="sound-toggle muted" id="soundToggle" aria-label="Звук" title="Музыка">
-  <!-- иконка звук вкл -->
-  <svg class="icon-on" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/></svg>
-  <!-- иконка звук выкл -->
-  <svg class="icon-off" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.59 3 2.7-2.7-1.42-1.42-2.7 2.71-2.7-2.71-1.42 1.42 2.71 2.7-2.71 2.7 1.42 1.42 2.7-2.71 2.7 2.71 1.42-1.42-2.71-2.7z"/></svg>
+  <!-- иконка звук вкл (минималистичная) -->
+  <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 9v6h3l5 4V5L8 9H5z" fill="#fff"/>
+    <path d="M16.5 9.5a3.6 3.6 0 0 1 0 5"/>
+    <path d="M19 7.2a7 7 0 0 1 0 9.6"/>
+  </svg>
+  <!-- иконка звук выкл (минималистичная) -->
+  <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 9v6h3l5 4V5L8 9H5z" fill="#fff"/>
+    <path d="M16 9.5l5 5M21 9.5l-5 5"/>
+  </svg>
 </button>
 
 <!-- ════ HERO ════ -->
