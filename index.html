@@ -163,10 +163,10 @@
       color: var(--burgundy);
       margin: clamp(12px,4vw,20px) 0 clamp(10px,3vw,14px);
     }
-    .calendar { display: inline-block; }
+    .calendar { display: inline-block; position: relative; padding-bottom: clamp(20px,6vw,30px); }
     .cal-row {
       display: grid;
-      grid-template-columns: repeat(7, clamp(28px,8vw,38px));
+      grid-template-columns: repeat(7, clamp(30px,8.5vw,40px));
       text-align: center;
     }
     .cal-row.days span {
@@ -177,27 +177,38 @@
     }
     .cal-row.nums span {
       font-family: var(--font-head);
-      font-size: clamp(.9rem,3.5vw,1.15rem);
+      font-size: clamp(.95rem,3.6vw,1.2rem);
       line-height: 2;
     }
     .cal-row.nums .today {
-      color: var(--burgundy);
+      color: #fff;
       font-weight: 500;
       position: relative;
+      z-index: 1;
     }
-    .cal-row.nums .today::after {
+    /* кружок-маркер на 01 как в макете */
+    .cal-row.nums .today::before {
       content: '';
       position: absolute;
-      bottom: 1px; left: 50%;
-      transform: translateX(-50%);
-      width: 18px; height: 1px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(26px,7vw,34px);
+      height: clamp(26px,7vw,34px);
       background: var(--burgundy);
+      border-radius: 50%;
+      z-index: -1;
     }
+    /* «August» курсивом, с наклоном, перекрывая числа справа */
     .cal-month {
       font-family: var(--font-head);
-      font-size: clamp(1.3rem,5vw,1.7rem);
+      font-size: clamp(1.5rem,5.5vw,2rem);
       color: var(--burgundy);
-      margin-top: 2px;
+      position: absolute;
+      right: -4px;
+      bottom: -2px;
+      transform: rotate(-8deg);
+      transform-origin: bottom right;
+      pointer-events: none;
     }
     .hero-invite {
       font-size: clamp(.88rem,3vw,1.02rem);
@@ -212,6 +223,7 @@
       background: var(--cream);
       padding: clamp(28px,7vw,48px) clamp(16px,5vw,24px) 0;
       overflow: hidden;
+      text-align: center;
     }
     .section-script {
       font-family: var(--font-head);
@@ -501,9 +513,9 @@
     .detail-block { margin-bottom: clamp(18px,5vw,26px); }
     .detail-block:last-child { margin-bottom: 0; }
     .detail-block h3 {
-      font-family: var(--font-head);
-      font-size: clamp(1.4rem,5vw,1.7rem);
-      font-weight: 500; margin-bottom: 8px;
+      font-family: var(--font-body);
+      font-size: clamp(1rem,3.4vw,1.18rem);
+      font-weight: 600; margin-bottom: 8px;
       color: var(--burgundy);
     }
     .detail-block p {
@@ -663,6 +675,25 @@
     .footer-love {
       font-size: clamp(.62rem,2vw,.72rem);
       letter-spacing: .15em; text-transform: uppercase; color: var(--grey);
+    }
+    /* Счётчик дней */
+    .countdown {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .countdown-num {
+      font-family: var(--font-head);
+      font-size: clamp(2.6rem,11vw,3.6rem);
+      color: var(--burgundy);
+      line-height: 1;
+    }
+    .countdown-label {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(.82rem,2.8vw,.98rem);
+      color: var(--text);
     }
 
     /* ══════════════════════════════════════════
@@ -852,7 +883,25 @@
       .footer-photo { aspect-ratio: 21/9; max-height: 70vh; }
       .footer-contacts { padding-bottom: clamp(50px,7vw,80px); }
       .contact-name { font-size: 2.4rem; }
-      .contact-phone { font-size: 1.35rem; }
+      .contact-phone { font-size: 1.4rem; }
+
+      /* — Крупнее основной текст для веб-версии — */
+      .hero-invite   { font-size: 1.18rem; line-height: 1.85; max-width: 500px; }
+      .dresscode-text{ font-size: 1.2rem; }
+      .detail-block p{ font-size: 1.12rem; line-height: 1.85; }
+      .detail-block h3 { font-size: 1.45rem; }
+      .rsvp-subtitle { font-size: 1.18rem; }
+      .venue-address { font-size: 1.18rem; }
+      .venue-name    { font-size: 1.5rem; }
+      .form-label, .attendance-q, .radio-opt { font-size: 1.05rem; }
+      .form-input, .form-textarea { font-size: 1.08rem; }
+      .btn-map, .btn-submit { font-size: 1rem; }
+      .cal-row.days span { font-size: .95rem; }
+      .countdown-num { font-size: 4.2rem; }
+      .countdown-label { font-size: 1.15rem; }
+      .footer-love { font-size: .82rem; }
+      .contact-role { font-size: .82rem; }
+      .swatch-label { font-size: 1.5rem; }
     }
   </style>
 </head>
@@ -953,7 +1002,7 @@
 <section class="carousel-section">
   <div class="carousel-track-wrap" id="carouselWrap">
     <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in;" /></div>
+      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in; object-position: 38% center;" /></div>
       <div class="carousel-slide"><img src="images/gallery2.jpg" alt="Фото 2" onclick="openLightbox(1)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery3.jpg" alt="Фото 3" onclick="openLightbox(2)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery4.jpg" alt="Фото 4" onclick="openLightbox(3)" style="cursor:zoom-in;" /></div>
@@ -1048,6 +1097,13 @@
 </section>
 
 <footer class="footer-contacts">
+  <!-- Счётчик дней до свадьбы -->
+  <div class="countdown reveal">
+    <span class="countdown-num" id="countdownNum">—</span>
+    <span class="countdown-label" id="countdownLabel">дней до нашей свадьбы</span>
+  </div>
+  <div class="footer-divider"></div>
+
   <div class="footer-contacts-grid reveal">
     <div class="contact-card">
       <span class="contact-role">невеста</span>
@@ -1164,6 +1220,35 @@ function submitForm(e) {
     document.getElementById('formSuccess').classList.add('show');
   }, 600);
 }
+
+/* ═══════════════════════════════════════
+   СЧЁТЧИК ДНЕЙ ДО СВАДЬБЫ (01.08.2026)
+═══════════════════════════════════════ */
+(function(){
+  const target = new Date(2026, 7, 1); // 1 августа 2026 (месяцы с 0)
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const days = Math.round((target - today) / 86400000);
+  const numEl = document.getElementById('countdownNum');
+  const labEl = document.getElementById('countdownLabel');
+  function plural(n) {
+    const a = Math.abs(n) % 100, b = a % 10;
+    if (a > 10 && a < 20) return 'дней';
+    if (b > 1 && b < 5) return 'дня';
+    if (b === 1) return 'день';
+    return 'дней';
+  }
+  if (days > 0) {
+    numEl.textContent = days;
+    labEl.textContent = plural(days) + ' до нашей свадьбы';
+  } else if (days === 0) {
+    numEl.textContent = '♥';
+    labEl.textContent = 'сегодня наш день!';
+  } else {
+    numEl.textContent = '♥';
+    labEl.textContent = 'мы поженились!';
+  }
+})();
 
 /* ═══════════════════════════════════════
    ФОНОВАЯ МУЗЫКА
