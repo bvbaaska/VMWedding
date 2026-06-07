@@ -55,7 +55,7 @@
     /* Заголовки на Marianna остаются прямыми (курсив только у Vollkorn) */
     .hero-names, .hero-subtitle, .cal-row.nums span, .cal-month,
     .section-script, .sched-time, .this-is-love span,
-    .details-title, .detail-block h3, .form-success p,
+    .details-title, .form-success p,
     .footer-heading, .contact-name, .contact-phone {
       font-style: normal;
     }
@@ -117,6 +117,7 @@
       width: clamp(84px,26%,120px);
       pointer-events: none;
       z-index: 1;
+      mix-blend-mode: multiply;   /* убирает белый фон png на кремовом */
     }
     .hero-names {
       font-family: var(--font-head);
@@ -222,7 +223,7 @@
     .program-section {
       background: var(--cream);
       padding: clamp(28px,7vw,48px) clamp(16px,5vw,24px) 0;
-      overflow: hidden;
+      overflow: visible;
       text-align: center;
     }
     .section-script {
@@ -234,8 +235,9 @@
     .program-photo-wrap {
       position: relative;
       margin: 0 calc(-1 * clamp(16px,5vw,24px));
-      overflow: hidden;
+      overflow: visible;   /* чтобы «This is love» выходил за рамку */
     }
+    .program-photo-clip { overflow: hidden; }
     .program-photo {
       width: 100%; display: block;
       aspect-ratio: 4/3;
@@ -274,13 +276,14 @@
     }
     .this-is-love {
       position: absolute;
-      right: clamp(-8px,-2vw,0px);
-      bottom: clamp(10px,4vw,24px);
+      left: clamp(10px,4vw,24px);
+      bottom: clamp(34px,14vw,90px);
       display: flex; flex-direction: column;
-      align-items: flex-end;
-      transform: rotate(-8deg);
-      transform-origin: bottom right;
+      align-items: flex-start;
+      transform: rotate(45deg);
+      transform-origin: bottom left;
       pointer-events: none;
+      z-index: 3;
     }
     .this-is-love span {
       font-family: var(--font-head);
@@ -514,6 +517,7 @@
     .detail-block:last-child { margin-bottom: 0; }
     .detail-block h3 {
       font-family: var(--font-body);
+      font-style: italic;
       font-size: clamp(1rem,3.4vw,1.18rem);
       font-weight: 600; margin-bottom: 8px;
       color: var(--burgundy);
@@ -929,28 +933,8 @@
 
 <!-- ════ HERO ════ -->
 <section class="hero">
-  <!-- Рисунок двух рук с сердцем (line-art) -->
-  <svg class="deco-hands" viewBox="0 0 200 150" fill="none" stroke="#C4A882" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-    <!-- сердце над касанием -->
-    <path d="M100 36 C96 28 84 28 84 38 C84 47 100 56 100 56 C100 56 116 47 116 38 C116 28 104 28 100 36 Z" stroke-width="1.5"/>
-    <!-- левая рука (тянется справа налево к центру) -->
-    <path d="M14 120 C34 112 52 104 66 92"/>
-    <path d="M66 92 C74 86 82 80 90 74"/>            <!-- указательный палец -->
-    <path d="M70 96 C76 92 82 90 88 88"/>            <!-- средний -->
-    <path d="M64 100 C70 98 76 98 82 98"/>           <!-- безымянный -->
-    <path d="M58 104 C63 104 68 105 73 107"/>        <!-- мизинец -->
-    <path d="M44 110 C40 102 40 96 46 92"/>          <!-- большой -->
-    <!-- правая рука (тянется слева направо к центру) -->
-    <path d="M186 120 C166 112 148 104 134 92"/>
-    <path d="M134 92 C126 86 118 80 110 74"/>        <!-- указательный -->
-    <path d="M130 96 C124 92 118 90 112 88"/>        <!-- средний -->
-    <path d="M136 100 C130 98 124 98 118 98"/>       <!-- безымянный -->
-    <path d="M142 104 C137 104 132 105 127 107"/>    <!-- мизинец -->
-    <path d="M156 110 C160 102 160 96 154 92"/>      <!-- большой -->
-    <!-- маленькие листики-акценты -->
-    <ellipse cx="24" cy="118" rx="6" ry="3" transform="rotate(-25 24 118)" fill="#C4A882" stroke="none" opacity=".5"/>
-    <ellipse cx="176" cy="118" rx="6" ry="3" transform="rotate(25 176 118)" fill="#C4A882" stroke="none" opacity=".5"/>
-  </svg>
+  <!-- Рисунок двух рук с сердцем -->
+  <img class="deco-hands" src="images/hands.png" alt="" aria-hidden="true" />
 
   <h1 class="hero-names reveal">Мариясена<br/>Василий</h1>
   <div class="hero-photo-wrap reveal-scale delay-2">
@@ -977,7 +961,9 @@
 <section class="program-section">
   <p class="section-script reveal">Программа торжества</p>
   <div class="program-photo-wrap reveal-scale">
-    <img class="program-photo" src="images/program.jpg" alt="Программа" />
+    <div class="program-photo-clip">
+      <img class="program-photo" src="images/program.jpg" alt="Программа" />
+    </div>
     <div class="schedule-overlay">
       <div class="sched-row delay-1"><span class="sched-time">16.00</span><span class="sched-event">СБОР ГОСТЕЙ</span></div>
       <div class="sched-row delay-2"><span class="sched-time">17.00</span><span class="sched-event">ЦЕРЕМОНИЯ</span></div>
@@ -1002,7 +988,7 @@
 <section class="carousel-section">
   <div class="carousel-track-wrap" id="carouselWrap">
     <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in; object-position: 38% center;" /></div>
+      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in; object-position: 65% center;" /></div>
       <div class="carousel-slide"><img src="images/gallery2.jpg" alt="Фото 2" onclick="openLightbox(1)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery3.jpg" alt="Фото 3" onclick="openLightbox(2)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery4.jpg" alt="Фото 4" onclick="openLightbox(3)" style="cursor:zoom-in;" /></div>
