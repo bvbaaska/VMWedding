@@ -318,8 +318,8 @@
     }
     .this-is-love {
       position: absolute;
-      right: clamp(16px,6vw,40px);
-      bottom: clamp(28px,10vw,64px);
+      right: clamp(-18px,-5vw,-8px);
+      bottom: clamp(-10px,-3vw,-4px);
       display: flex; flex-direction: column;
       align-items: flex-end;
       transform: rotate(-45deg);
@@ -327,6 +327,7 @@
       pointer-events: none;
       z-index: 50;            /* поверх всех компонентов */
     }
+    .this-is-love span { letter-spacing: .12em; }   /* растянуть текст */
     .this-is-love span {
       font-family: var(--font-head);
       font-size: clamp(1.1rem,4vw,1.5rem);
@@ -1063,7 +1064,7 @@
 <section class="carousel-section">
   <div class="carousel-track-wrap" id="carouselWrap">
     <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in; object-position: calc(50% - 3px) center;" /></div>
+      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in; object-position: calc(50% + 7px) center;" /></div>
       <div class="carousel-slide"><img src="images/gallery2.jpg" alt="Фото 2" onclick="openLightbox(1)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery3.jpg" alt="Фото 3" onclick="openLightbox(2)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery4.jpg" alt="Фото 4" onclick="openLightbox(3)" style="cursor:zoom-in;" /></div>
@@ -1083,7 +1084,7 @@
   </div>
 
   <div class="dresscode-content">
-    <p class="section-script reveal">Дресс-код</p>
+    <p class="section-script reveal">дресс-код</p>
     <p class="dresscode-text reveal delay-1">Мы будем рады, если вы поддержите<br/>цветовую палитру нашей свадьбы</p>
     <div class="palette">
       <div class="swatch reveal delay-1"><div class="swatch-circle" style="background:#8B9B5A;"></div><span class="swatch-label">olive</span></div>
@@ -1104,7 +1105,7 @@
 
 <!-- ════ ДЕТАЛИ ════ -->
 <section class="details-section">
-  <img class="details-bg" src="images/details.jpg" alt="" aria-hidden="true" />
+  <img class="details-bg" src="images/detali.png" alt="" aria-hidden="true" />
   <div class="details-inner">
     <p class="details-title reveal">Несколько деталей</p>
     <div class="details-blocks-wrap">
