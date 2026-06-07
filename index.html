@@ -32,7 +32,8 @@
       min-height: 100vh;
     }
 
-    @media (min-width: 481px) {
+    /* планшет / карточка по центру */
+    @media (min-width: 481px) and (max-width: 899px) {
       body { margin: 32px auto; border-radius: 6px; min-height: auto; }
     }
 
@@ -86,11 +87,13 @@
       text-align: center;
       overflow: hidden;
     }
-    .deco-branch {
+    /* рисунок рук с сердцем — правый верхний угол (левее кнопки звука) */
+    .deco-hands {
       position: absolute;
-      top: 0; right: 0;
-      width: clamp(80px,25%,120px);
+      top: 6px; right: 70px;
+      width: clamp(84px,26%,120px);
       pointer-events: none;
+      z-index: 1;
     }
     .hero-names {
       font-family: 'Great Vibes', cursive;
@@ -98,18 +101,38 @@
       color: var(--burgundy);
       line-height: 1.2;
       margin-bottom: clamp(8px,3vw,14px);
-      position: relative; z-index: 1;
+      position: relative; z-index: 2;
+      text-align: left;
+      padding-left: clamp(6px,3vw,18px);
     }
-    .hero-photo {
-      display: block;
+    /* обёртка фото — обрезает нижнюю чёрную полоску + виньетка */
+    .hero-photo-wrap {
+      position: relative;
       width: calc(100% + clamp(32px,10vw,48px));
       margin-left: clamp(-24px,-5vw,-16px);
       aspect-ratio: 3/4;
+      overflow: hidden;
+    }
+    .hero-photo {
+      display: block;
+      width: 100%;
+      height: 104%;            /* чуть выше, чтобы скрыть низ */
       object-fit: cover;
       object-position: center top;
       transition: transform .6s cubic-bezier(.22,.61,.36,1);
     }
-    .hero-photo:hover { transform: scale(1.015); }
+    .hero-photo-wrap:hover .hero-photo { transform: scale(1.015); }
+    /* виньетка — затемнение/осветление углов как на макете */
+    .hero-photo-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 78% 80% at 50% 45%,
+          transparent 55%,
+          rgba(245,237,224,.45) 82%,
+          rgba(245,237,224,.95) 100%);
+    }
 
     .hero-subtitle {
       font-family: 'Great Vibes', cursive;
@@ -623,11 +646,9 @@
     ══════════════════════════════════════════ */
     .sound-toggle {
       position: fixed;
-      top: 18px;
-      /* всегда внутри карточки 480px, прижата к её правому краю */
-      left: 50%;
-      transform: translateX(calc(240px - 56px - 18px));
-      width: 56px; height: 56px;
+      top: 16px;
+      right: 16px;                 /* мобильная: у края окна */
+      width: 52px; height: 52px;
       border-radius: 50%;
       background: var(--burgundy);
       border: 2px solid rgba(255,255,255,.85);
@@ -639,20 +660,17 @@
       box-shadow: 0 6px 20px rgba(42,21,21,.28);
       transition: transform .2s, background .2s;
     }
-    /* на узких экранах прижимаем к правому краю окна */
-    @media (max-width: 520px) {
-      .sound-toggle {
-        left: auto;
-        right: 16px;
-        transform: none;
-      }
+    /* диапазон «карточка по центру» (481–899px) — кнопка у правого края карточки */
+    @media (min-width: 481px) and (max-width: 899px) {
+      .sound-toggle { right: max(16px, calc(50vw - 240px + 14px)); }
     }
-    .sound-toggle:hover { transform: translateX(calc(240px - 56px - 18px)) scale(1.08); background: #8e1f44; }
-    @media (max-width: 520px) {
-      .sound-toggle:hover { transform: scale(1.08); }
+    /* десктоп — у края окна с отступом */
+    @media (min-width: 900px) {
+      .sound-toggle { top: 20px; right: clamp(20px,4vw,60px); width: 56px; height: 56px; }
     }
+    .sound-toggle:hover { transform: scale(1.08); background: #8e1f44; }
     .sound-toggle:active { filter: brightness(.92); }
-    .sound-toggle svg { width: 24px; height: 24px; fill: #fff; }
+    .sound-toggle svg { width: 23px; height: 23px; fill: #fff; }
     .sound-toggle .icon-off { display: none; }
     .sound-toggle.muted .icon-on  { display: none; }
     .sound-toggle.muted .icon-off { display: block; }
@@ -669,6 +687,127 @@
     @keyframes soundPulse {
       0%   { transform: scale(1);   opacity: .7; }
       100% { transform: scale(1.4); opacity: 0; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       ШИРОКАЯ ДЕСКТОП-ВЕРСИЯ (≥ 900px)
+       На компьютере сайт раскрывается на весь экран
+    ══════════════════════════════════════════════════════════ */
+    @media (min-width: 900px) {
+      html { background: var(--cream); display: block; }
+      body {
+        max-width: 100%;
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      /* — HERO: двухколоночный, на весь экран — */
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 1.05fr;
+        align-items: center;
+        column-gap: clamp(40px,6vw,110px);
+        min-height: 100vh;
+        padding: 80px clamp(48px,8vw,150px);
+        text-align: left;
+      }
+      .deco-hands { width: 180px; top: 28px; right: clamp(90px,9vw,150px); }
+      .hero-names {
+        grid-column: 1;
+        font-size: clamp(4rem,6.5vw,7rem);
+        margin: 0 0 18px; padding: 0;
+        order: 1;
+      }
+      .hero-subtitle {
+        grid-column: 1; order: 3;
+        text-align: left;
+        font-size: clamp(2.2rem,3vw,3.2rem);
+        margin: 22px 0 16px;
+      }
+      .calendar { grid-column: 1; order: 4; justify-self: start; }
+      .cal-row { grid-template-columns: repeat(7, 46px); }
+      .cal-row.days span { font-size: .82rem; }
+      .cal-row.nums span { font-size: 1.4rem; }
+      .cal-month { font-size: 2.1rem; }
+      .hero-invite {
+        grid-column: 1; order: 5;
+        text-align: left;
+        max-width: 460px;
+        font-size: 1rem;
+        margin-top: 24px;
+      }
+      .hero-photo-wrap {
+        grid-column: 2;
+        grid-row: 1 / 6;
+        order: 2;
+        width: 100%;
+        max-width: 540px;
+        margin: 0;
+        justify-self: center;
+        border-radius: 6px;
+        box-shadow: 0 24px 60px rgba(42,21,21,.22);
+      }
+
+      /* — Общие отступы широких секций — */
+      .program-section, .venue-section, .carousel-section,
+      .details-section, .rsvp-section, .footer-section, .footer-contacts {
+        padding-left: clamp(48px,8vw,150px);
+        padding-right: clamp(48px,8vw,150px);
+      }
+
+      /* — ПРОГРАММА: широкий баннер — */
+      .program-section { text-align: center; padding-top: clamp(50px,7vw,90px); }
+      .section-script { font-size: clamp(2.6rem,4vw,4rem); }
+      .program-photo-wrap { margin: 0 auto; max-width: 1100px; border-radius: 8px; }
+      .program-photo { aspect-ratio: 16/9; max-height: 78vh; object-position: center 35%; }
+      .schedule-overlay {
+        align-items: center;
+        text-align: center;
+      }
+      .sched-row { justify-content: center; }
+      .sched-time { font-size: clamp(1.8rem,2.6vw,2.6rem); }
+      .sched-event { font-size: clamp(.85rem,1.1vw,1rem); }
+
+      /* — КАРУСЕЛЬ / ДРЕСС-КОД — */
+      .carousel-track-wrap { max-width: 520px; margin: 0 auto; border-radius: 8px; }
+      .carousel-slide img { border-radius: 10px; }
+      .dresscode-content { max-width: 720px; margin: 0 auto; }
+      .palette { max-width: 560px; gap: 28px 24px; }
+      .swatch-circle { width: 84px; height: 84px; }
+      .swatch-label { font-size: 1.05rem; }
+
+      /* — ДЕТАЛИ: контент по центру, в 3 колонки — */
+      .details-bg { object-position: center 30%; }
+      .details-inner { max-width: 1000px; margin: 0 auto; padding-top: clamp(50px,7vw,90px); padding-bottom: clamp(50px,7vw,90px); }
+      .details-title { font-size: clamp(2.6rem,4vw,4rem); }
+      .details-blocks-wrap {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 36px;
+        text-align: center;
+      }
+      .detail-block { margin-bottom: 0; }
+      .detail-block h3 { font-size: 1.35rem; }
+      .detail-block p { font-size: .95rem; }
+
+      /* — МЕСТО — */
+      .venue-section { padding-top: clamp(50px,7vw,90px); padding-bottom: clamp(50px,7vw,90px); }
+      .venue-name { font-size: 1.4rem; }
+      .venue-address { font-size: 1.05rem; }
+      .btn-map { font-size: .95rem; padding: 16px 48px; }
+
+      /* — RSVP: форма по центру — */
+      .rsvp-section { padding-top: clamp(50px,7vw,90px); }
+      .rsvp-subtitle { font-size: 1rem; max-width: 560px; margin-left: auto; margin-right: auto; }
+      .rsvp-form { max-width: 560px; margin: 0 auto; }
+
+      /* — FOOTER — */
+      .footer-heading { font-size: clamp(2.4rem,3.5vw,3.4rem); }
+      .footer-photo { aspect-ratio: 21/9; max-height: 70vh; }
+      .footer-contacts { padding-bottom: clamp(50px,7vw,80px); }
+      .contact-name { font-size: 2.4rem; }
+      .contact-phone { font-size: 1.35rem; }
     }
   </style>
 </head>
@@ -689,21 +828,33 @@
 
 <!-- ════ HERO ════ -->
 <section class="hero">
-  <svg class="deco-branch" viewBox="0 0 160 220" fill="none">
-    <path d="M145 4 Q122 42 100 65 Q78 88 108 108 Q132 122 122 148 Q112 168 88 180" stroke="#C4A882" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-    <path d="M100 65 Q84 52 72 34" stroke="#C4A882" stroke-width="1" fill="none" stroke-linecap="round"/>
-    <path d="M108 108 Q126 96 140 78" stroke="#C4A882" stroke-width="1" fill="none" stroke-linecap="round"/>
-    <path d="M122 148 Q138 136 152 124" stroke="#C4A882" stroke-width="1" fill="none" stroke-linecap="round"/>
-    <ellipse cx="71" cy="32" rx="8" ry="5" transform="rotate(-35 71 32)" fill="#C4A882" opacity=".55"/>
-    <ellipse cx="141" cy="77" rx="7" ry="4" transform="rotate(22 141 77)" fill="#C4A882" opacity=".55"/>
-    <ellipse cx="154" cy="122" rx="7" ry="4" transform="rotate(12 154 122)" fill="#C4A882" opacity=".55"/>
-    <ellipse cx="106" cy="62" rx="5" ry="3" transform="rotate(-52 106 62)" fill="#C4A882" opacity=".45"/>
-    <circle cx="152" cy="8" r="7" stroke="#C4A882" stroke-width="1.2" fill="none"/>
-    <circle cx="148" cy="4" r="5" stroke="#C4A882" stroke-width="1" fill="none"/>
+  <!-- Рисунок двух рук с сердцем (line-art) -->
+  <svg class="deco-hands" viewBox="0 0 200 150" fill="none" stroke="#C4A882" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- сердце над касанием -->
+    <path d="M100 36 C96 28 84 28 84 38 C84 47 100 56 100 56 C100 56 116 47 116 38 C116 28 104 28 100 36 Z" stroke-width="1.5"/>
+    <!-- левая рука (тянется справа налево к центру) -->
+    <path d="M14 120 C34 112 52 104 66 92"/>
+    <path d="M66 92 C74 86 82 80 90 74"/>            <!-- указательный палец -->
+    <path d="M70 96 C76 92 82 90 88 88"/>            <!-- средний -->
+    <path d="M64 100 C70 98 76 98 82 98"/>           <!-- безымянный -->
+    <path d="M58 104 C63 104 68 105 73 107"/>        <!-- мизинец -->
+    <path d="M44 110 C40 102 40 96 46 92"/>          <!-- большой -->
+    <!-- правая рука (тянется слева направо к центру) -->
+    <path d="M186 120 C166 112 148 104 134 92"/>
+    <path d="M134 92 C126 86 118 80 110 74"/>        <!-- указательный -->
+    <path d="M130 96 C124 92 118 90 112 88"/>        <!-- средний -->
+    <path d="M136 100 C130 98 124 98 118 98"/>       <!-- безымянный -->
+    <path d="M142 104 C137 104 132 105 127 107"/>    <!-- мизинец -->
+    <path d="M156 110 C160 102 160 96 154 92"/>      <!-- большой -->
+    <!-- маленькие листики-акценты -->
+    <ellipse cx="24" cy="118" rx="6" ry="3" transform="rotate(-25 24 118)" fill="#C4A882" stroke="none" opacity=".5"/>
+    <ellipse cx="176" cy="118" rx="6" ry="3" transform="rotate(25 176 118)" fill="#C4A882" stroke="none" opacity=".5"/>
   </svg>
 
   <h1 class="hero-names reveal">Мариясена<br/>Василий</h1>
-  <img class="hero-photo reveal-scale delay-2" src="images/hero.jpg" alt="Мариясена и Василий" />
+  <div class="hero-photo-wrap reveal-scale delay-2">
+    <img class="hero-photo" src="images/hero.jpg" alt="Мариясена и Василий" />
+  </div>
   <p class="hero-subtitle reveal delay-1">мы женимся!</p>
 
   <div class="calendar reveal delay-2">
@@ -794,17 +945,19 @@
   <img class="details-bg" src="images/details.jpg" alt="" aria-hidden="true" />
   <div class="details-inner">
     <p class="details-title reveal">Несколько деталей</p>
-    <div class="detail-block reveal delay-1">
-      <h3>Подарки</h3>
-      <p>Ваши искренние пожелания мы сохраним в сердце, а в качестве подарка будем рады вкладу в наше будущее в конверте</p>
-    </div>
-    <div class="detail-block reveal delay-2">
-      <h3>Маленькие гости</h3>
-      <p>Чтобы мы могли в полной мере насладиться вечером, мы решили провести праздник без маленьких детей. Надеемся на ваше понимание и будем рады видеть вас!</p>
-    </div>
-    <div class="detail-block reveal delay-3">
-      <h3>Пожелания</h3>
-      <p>Просим поддержать наше решение провести этот праздник без традиционных выкриков «Горько!». Пусть наши поцелуи останутся личным моментом.</p>
+    <div class="details-blocks-wrap">
+      <div class="detail-block reveal delay-1">
+        <h3>Подарки</h3>
+        <p>Ваши искренние пожелания мы сохраним в сердце, а в качестве подарка будем рады вкладу в наше будущее в конверте</p>
+      </div>
+      <div class="detail-block reveal delay-2">
+        <h3>Маленькие гости</h3>
+        <p>Чтобы мы могли в полной мере насладиться вечером, мы решили провести праздник без маленьких детей. Надеемся на ваше понимание и будем рады видеть вас!</p>
+      </div>
+      <div class="detail-block reveal delay-3">
+        <h3>Пожелания</h3>
+        <p>Просим поддержать наше решение провести этот праздник без традиционных выкриков «Горько!». Пусть наши поцелуи останутся личным моментом.</p>
+      </div>
     </div>
   </div>
 </section>
