@@ -14,17 +14,9 @@
     /* ── Шрифт Marianna (положите файлы в fonts/) ── */
     @font-face {
       font-family: 'Marianna';
-      src: url('fonts/Marianna-Regular.woff2') format('woff2'),
-           url('fonts/Marianna-Regular.woff')  format('woff');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Marianna';
-      src: url('fonts/Marianna-Bold.woff2') format('woff2'),
-           url('fonts/Marianna-Bold.woff')  format('woff');
-      font-weight: 700;
+      src: url('fonts/Marianna.woff2') format('woff2'),
+           url('fonts/Marianna.woff')  format('woff');
+      font-weight: 400 700;
       font-style: normal;
       font-display: swap;
     }
@@ -47,6 +39,7 @@
       color: var(--text);
       font-family: var(--font-body);
       font-weight: 400;
+      font-style: italic;          /* Vollkorn — курсив везде */
       max-width: 480px;
       margin: 0 auto;
       overflow-x: hidden;
@@ -57,6 +50,14 @@
     /* планшет / карточка по центру */
     @media (min-width: 481px) and (max-width: 899px) {
       body { margin: 32px auto; border-radius: 6px; min-height: auto; }
+    }
+
+    /* Заголовки на Marianna остаются прямыми (курсив только у Vollkorn) */
+    .hero-names, .hero-subtitle, .cal-row.nums span, .cal-month,
+    .section-script, .sched-time, .this-is-love span, .venue-name,
+    .details-title, .detail-block h3, .form-success p,
+    .footer-heading, .contact-name, .contact-phone {
+      font-style: normal;
     }
 
     /* ══════════════════════════════════════════
