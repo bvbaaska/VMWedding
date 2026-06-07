@@ -13,9 +13,16 @@
     :root {
       --cream:    #F5EDE0;
       --burgundy: #7B1A3A;
-      --text:     #3A2020;
+      --text:     #2A1515;
       --rose:     #C0607A;
       --grey:     #888;
+      --card-w:   480px;
+    }
+
+    /* ─── Глобальный wrapper — центрирует на десктопе ─── */
+    html {
+      background: #E8DDD0;
+      min-height: 100%;
     }
 
     body {
@@ -23,254 +30,245 @@
       color: var(--text);
       font-family: 'Montserrat', sans-serif;
       font-weight: 300;
-      max-width: 480px;
+      width: 100%;
+      max-width: var(--card-w);
       margin: 0 auto;
       overflow-x: hidden;
+      /* тень чтобы на десктопе выглядело как карточка */
+      box-shadow: 0 0 60px rgba(0,0,0,.12);
+      min-height: 100vh;
     }
 
-    /* ══ SCREEN 1 · HERO ══ */
+    /* ════════════════════════════════════
+       СЕКЦИЯ 1 · HERO
+    ════════════════════════════════════ */
     .hero {
       background: var(--cream);
-      padding: 32px 20px 24px;
+      padding: clamp(20px,5vw,32px) clamp(16px,5vw,24px) clamp(16px,4vw,24px);
       position: relative;
       text-align: center;
+      overflow: hidden;
     }
 
-    /* декоративные ветки */
-    .hero-deco-br {
+    /* SVG декор ветки — правый верхний угол */
+    .deco-branch {
       position: absolute;
       top: 0; right: 0;
-      width: 120px;
+      width: clamp(80px, 25%, 120px);
       pointer-events: none;
-      opacity: .85;
-    }
-    .hero-deco-tl {
-      position: absolute;
-      top: 28px; left: 16px;
-      width: 36px;
-      pointer-events: none;
-      opacity: .7;
     }
 
     .hero-names {
       font-family: 'Great Vibes', cursive;
-      font-size: 3rem;
+      font-size: clamp(2rem, 10vw, 3.2rem);
       color: var(--burgundy);
-      line-height: 1.15;
-      margin-bottom: 10px;
+      line-height: 1.2;
+      margin-bottom: clamp(8px,3vw,14px);
       position: relative;
       z-index: 1;
     }
 
     .hero-photo {
-      width: 100%;
+      display: block;
+      width: calc(100% + clamp(32px,10vw,48px));
+      margin-left: clamp(-24px,-5vw,-16px);
       aspect-ratio: 3/4;
       object-fit: cover;
       object-position: center top;
-      display: block;
-      margin: 0 -20px;
-      width: calc(100% + 40px);
     }
 
     .hero-subtitle {
       font-family: 'Great Vibes', cursive;
-      font-size: 1.9rem;
+      font-size: clamp(1.5rem, 6vw, 2rem);
       color: var(--burgundy);
-      margin: 18px 0 14px;
+      margin: clamp(12px,4vw,20px) 0 clamp(10px,3vw,14px);
     }
 
-    /* календарь */
+    /* ─── Календарь ─── */
     .calendar {
       display: inline-block;
-      margin-bottom: 6px;
     }
-    .cal-days-row, .cal-nums-row {
+    .cal-row {
       display: grid;
-      grid-template-columns: repeat(7, 36px);
-      gap: 0;
+      grid-template-columns: repeat(7, clamp(28px,8vw,38px));
       text-align: center;
     }
-    .cal-days-row span {
-      font-size: .65rem;
+    .cal-row.days span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(.55rem, 2vw, .7rem);
       font-weight: 500;
       color: var(--text);
-      letter-spacing: .03em;
       padding-bottom: 4px;
+      letter-spacing: .02em;
     }
-    .cal-nums-row span {
+    .cal-row.nums span {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
+      font-size: clamp(.9rem, 3.5vw, 1.15rem);
       color: var(--text);
       line-height: 2;
     }
-    .cal-nums-row .today {
+    .cal-row.nums .today {
       color: var(--burgundy);
       font-weight: 500;
       position: relative;
     }
-    .cal-nums-row .today::after {
+    .cal-row.nums .today::after {
       content: '';
       position: absolute;
-      bottom: 2px; left: 50%;
+      bottom: 1px; left: 50%;
       transform: translateX(-50%);
-      width: 20px; height: 1px;
+      width: 18px; height: 1px;
       background: var(--burgundy);
     }
     .cal-month {
       font-family: 'Great Vibes', cursive;
-      font-size: 1.6rem;
+      font-size: clamp(1.3rem, 5vw, 1.7rem);
       color: var(--burgundy);
-      text-align: center;
       margin-top: 2px;
     }
 
     .hero-invite {
-      font-size: .78rem;
-      line-height: 1.7;
+      font-size: clamp(.68rem, 2.5vw, .82rem);
+      line-height: 1.75;
       color: var(--text);
-      text-align: center;
-      margin-top: 20px;
-      padding: 0 4px;
+      margin-top: clamp(14px,4vw,22px);
     }
 
-    /* ══ SCREEN 2 · ПРОГРАММА ══ */
+    /* ════════════════════════════════════
+       СЕКЦИЯ 2 · ПРОГРАММА
+    ════════════════════════════════════ */
     .program-section {
       background: var(--cream);
-      padding: 40px 20px 0;
+      padding: clamp(28px,7vw,48px) clamp(16px,5vw,24px) 0;
     }
-    .program-title {
+    .section-script {
       font-family: 'Great Vibes', cursive;
-      font-size: 2.4rem;
+      font-size: clamp(1.8rem, 7vw, 2.6rem);
       color: var(--burgundy);
-      margin-bottom: 20px;
+      margin-bottom: clamp(14px,4vw,22px);
     }
+
     .program-photo-wrap {
       position: relative;
-      margin: 0 -20px;
+      margin: 0 clamp(-24px,-5vw,-16px);
     }
     .program-photo {
       width: 100%;
       display: block;
-      filter: grayscale(30%) brightness(.85);
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(25%) brightness(.82);
     }
     .schedule-overlay {
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 20px 24px;
-      gap: 14px;
+      padding: clamp(16px,5vw,28px) clamp(14px,5vw,24px);
+      gap: clamp(10px,3vw,18px);
     }
     .sched-row {
       display: flex;
       align-items: baseline;
-      gap: 16px;
+      gap: clamp(10px,3vw,18px);
     }
     .sched-time {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      color: rgba(255,255,255,.9);
-      min-width: 60px;
+      font-size: clamp(1.1rem, 4.5vw, 1.6rem);
+      color: rgba(255,255,255,.92);
       font-style: italic;
+      min-width: clamp(48px,13vw,68px);
     }
     .sched-event {
-      font-size: .72rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(.58rem, 2vw, .75rem);
       font-weight: 500;
       letter-spacing: .12em;
-      color: rgba(255,255,255,.9);
+      color: rgba(255,255,255,.92);
       text-transform: uppercase;
     }
+
+    /* This is love — правый край поверх фото */
     .this-is-love {
       position: absolute;
-      right: -10px;
-      bottom: 10px;
+      right: clamp(-8px,-2vw,0px);
+      bottom: clamp(10px,4vw,24px);
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 2px;
       transform: rotate(-8deg);
       transform-origin: bottom right;
+      pointer-events: none;
     }
     .this-is-love span {
       font-family: 'Great Vibes', cursive;
-      font-size: 1rem;
+      font-size: clamp(.8rem, 3vw, 1.1rem);
       color: var(--rose);
+      line-height: 1.6;
       white-space: nowrap;
-      line-height: 1.5;
     }
 
-    /* ══ МЕСТО ПРОВЕДЕНИЯ ══ */
+    /* ════════════════════════════════════
+       СЕКЦИЯ 2б · МЕСТО ПРОВЕДЕНИЯ
+    ════════════════════════════════════ */
     .venue-section {
       background: var(--cream);
-      padding: 40px 20px 40px;
+      padding: clamp(28px,7vw,48px) clamp(16px,5vw,24px);
       text-align: center;
-    }
-    .venue-title {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.4rem;
-      color: var(--burgundy);
-      margin-bottom: 20px;
     }
     .venue-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.05rem;
+      font-size: clamp(.95rem, 3.5vw, 1.1rem);
       font-weight: 500;
       margin-bottom: 6px;
     }
     .venue-address {
-      font-size: .85rem;
-      color: var(--text);
-      margin-bottom: 20px;
-      line-height: 1.6;
+      font-size: clamp(.75rem, 2.8vw, .88rem);
+      line-height: 1.65;
+      margin-bottom: clamp(16px,5vw,24px);
     }
     .btn-map {
       display: inline-block;
       background: var(--burgundy);
       color: #fff;
       font-family: 'Montserrat', sans-serif;
-      font-size: .78rem;
+      font-size: clamp(.72rem, 2.5vw, .82rem);
       font-weight: 400;
-      letter-spacing: .05em;
-      padding: 13px 36px;
+      letter-spacing: .04em;
+      padding: clamp(11px,3vw,14px) clamp(28px,8vw,40px);
       border-radius: 50px;
       text-decoration: none;
       transition: opacity .2s;
     }
-    .btn-map:hover { opacity: .85; }
+    .btn-map:hover { opacity: .82; }
 
-    /* ══ SCREEN 3 · ДРЕСС-КОД ══ */
-    .dresscode-section {
-      background: var(--cream);
-    }
+    /* ════════════════════════════════════
+       СЕКЦИЯ 3 · ДРЕСС-КОД
+    ════════════════════════════════════ */
     .dresscode-photo {
       width: 100%;
       display: block;
-      max-height: 260px;
+      aspect-ratio: 4/3;
       object-fit: cover;
       object-position: center 30%;
     }
     .dresscode-content {
-      padding: 28px 20px 40px;
+      background: var(--cream);
+      padding: clamp(24px,6vw,36px) clamp(16px,5vw,24px) clamp(32px,8vw,48px);
       text-align: center;
     }
-    .dresscode-title {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.4rem;
-      color: var(--burgundy);
-      margin-bottom: 12px;
-    }
     .dresscode-text {
-      font-size: .82rem;
+      font-size: clamp(.72rem, 2.5vw, .85rem);
       line-height: 1.7;
-      color: var(--text);
-      margin-bottom: 28px;
+      margin-bottom: clamp(20px,5vw,30px);
     }
     .palette {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px 12px;
-      max-width: 280px;
+      gap: clamp(12px,4vw,20px) clamp(8px,3vw,14px);
+      max-width: 300px;
       margin: 0 auto;
     }
     .swatch {
@@ -280,284 +278,272 @@
       gap: 6px;
     }
     .swatch-circle {
-      width: 64px;
-      height: 64px;
+      width: clamp(48px,14vw,68px);
+      height: clamp(48px,14vw,68px);
       border-radius: 50%;
-      box-shadow: 0 2px 8px rgba(0,0,0,.15);
+      box-shadow: 0 2px 10px rgba(0,0,0,.13);
     }
     .swatch-label {
-      font-size: .62rem;
+      font-size: clamp(.55rem, 1.8vw, .67rem);
       color: var(--grey);
-      letter-spacing: .03em;
+      letter-spacing: .02em;
     }
 
-    /* ══ SCREEN 4 · ДЕТАЛИ ══ */
+    /* ════════════════════════════════════
+       СЕКЦИЯ 4 · НЕСКОЛЬКО ДЕТАЛЕЙ
+       Всё поверх фото — фото = фон секции
+    ════════════════════════════════════ */
     .details-section {
       position: relative;
     }
-    .details-photo {
+    .details-bg {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      display: block;
-      height: 320px;
+      height: 100%;
       object-fit: cover;
       object-position: center;
-      filter: brightness(.95) saturate(.7);
+      filter: brightness(.92) saturate(.6);
+      z-index: 0;
     }
-    .details-overlay {
+    /* светлый overlay чтобы текст читался */
+    .details-section::after {
+      content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 320px;
-      background: rgba(245,237,224,.45);
-      display: flex;
-      align-items: flex-start;
-      padding: 36px 20px 0;
+      inset: 0;
+      background: rgba(245,237,224,.55);
+      z-index: 1;
+    }
+    .details-inner {
+      position: relative;
+      z-index: 2;
+      padding: clamp(28px,7vw,44px) clamp(16px,5vw,24px) clamp(32px,8vw,48px);
     }
     .details-title {
       font-family: 'Great Vibes', cursive;
-      font-size: 2.6rem;
+      font-size: clamp(2rem, 8vw, 2.8rem);
       color: var(--burgundy);
-    }
-    .details-content {
-      background: var(--cream);
-      padding: 32px 20px 40px;
+      margin-bottom: clamp(18px,5vw,28px);
     }
     .detail-block {
-      margin-bottom: 28px;
+      margin-bottom: clamp(18px,5vw,26px);
     }
     .detail-block:last-child { margin-bottom: 0; }
     .detail-block h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
+      font-size: clamp(.95rem, 3.5vw, 1.1rem);
       font-weight: 500;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: var(--text);
     }
     .detail-block p {
-      font-size: .8rem;
-      line-height: 1.75;
+      font-size: clamp(.72rem, 2.5vw, .82rem);
+      line-height: 1.78;
       color: var(--text);
     }
 
-    /* ══ SCREEN 5 · RSVP ══ */
+    /* ════════════════════════════════════
+       СЕКЦИЯ 5 · RSVP
+    ════════════════════════════════════ */
     .rsvp-section {
       background: var(--cream);
-      padding: 40px 20px 48px;
+      padding: clamp(32px,8vw,52px) clamp(16px,5vw,24px) clamp(40px,10vw,60px);
       text-align: center;
     }
-    .rsvp-title {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.6rem;
-      color: var(--burgundy);
-      margin-bottom: 16px;
-    }
     .rsvp-subtitle {
-      font-size: .8rem;
-      line-height: 1.7;
-      color: var(--text);
-      margin-bottom: 32px;
+      font-size: clamp(.72rem, 2.5vw, .83rem);
+      line-height: 1.75;
+      margin-bottom: clamp(24px,6vw,36px);
     }
-    .rsvp-form {
-      text-align: left;
-    }
-    .form-block {
-      margin-bottom: 20px;
-    }
+    .rsvp-form { text-align: left; }
+    .form-block { margin-bottom: clamp(14px,4vw,20px); }
     .form-label {
       display: block;
-      font-size: .78rem;
-      color: var(--text);
+      font-size: clamp(.72rem, 2.5vw, .82rem);
       margin-bottom: 8px;
+      color: var(--text);
     }
-    .form-input, .form-textarea {
+    .form-input,
+    .form-textarea {
       width: 100%;
       background: #fff;
-      border: 1.5px solid #D8CFC4;
-      border-radius: 12px;
-      padding: 14px 16px;
+      border: 1.5px solid #D4C8BA;
+      border-radius: clamp(8px,3vw,14px);
+      padding: clamp(11px,3vw,15px) clamp(12px,4vw,18px);
       font-family: 'Montserrat', sans-serif;
-      font-size: .85rem;
+      font-size: clamp(.78rem, 2.8vw, .88rem);
       font-weight: 300;
       color: var(--text);
       outline: none;
       transition: border-color .2s;
     }
-    .form-input:focus, .form-textarea:focus {
-      border-color: var(--burgundy);
+    .form-input:focus,
+    .form-textarea:focus { border-color: var(--burgundy); }
+    .form-textarea { resize: none; min-height: 54px; }
+
+    .attendance-q {
+      font-size: clamp(.72rem, 2.5vw, .82rem);
+      margin-bottom: 10px;
     }
-    .form-textarea {
-      resize: none;
-      min-height: 56px;
-    }
-    .radio-options {
+    .radio-box {
       background: #fff;
-      border: 1.5px solid #D8CFC4;
-      border-radius: 12px;
-      padding: 10px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      border: 1.5px solid #D4C8BA;
+      border-radius: clamp(8px,3vw,14px);
+      padding: clamp(8px,2.5vw,12px) clamp(12px,4vw,18px);
+      margin-bottom: clamp(14px,4vw,20px);
     }
     .radio-opt {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: .82rem;
-      padding: 6px 0;
+      gap: clamp(8px,2.5vw,12px);
+      font-size: clamp(.72rem, 2.5vw, .82rem);
+      padding: clamp(6px,2vw,9px) 0;
       cursor: pointer;
+      border-bottom: 1px solid #EDE4D8;
     }
-    .radio-opt input { display: none; }
-    .radio-dot {
-      width: 7px;
-      height: 7px;
+    .radio-opt:last-child { border-bottom: none; }
+    .radio-opt input[type=radio] { display: none; }
+    .radio-mark {
+      width: 8px; height: 8px;
       border-radius: 50%;
       background: var(--text);
       flex-shrink: 0;
+      opacity: .55;
+      transition: background .15s, opacity .15s;
     }
-    .radio-opt input:checked ~ .radio-dot-label .radio-dot { background: var(--burgundy); }
-    .attendance-question {
-      font-size: .82rem;
-      color: var(--text);
-      margin-bottom: 10px;
+    .radio-opt input[type=radio]:checked ~ .radio-mark {
+      background: var(--burgundy);
+      opacity: 1;
     }
+
     .btn-submit {
       display: block;
       width: 100%;
       background: var(--burgundy);
       color: #fff;
       font-family: 'Montserrat', sans-serif;
-      font-size: .82rem;
+      font-size: clamp(.75rem, 2.5vw, .85rem);
       font-weight: 400;
       letter-spacing: .05em;
-      padding: 15px;
+      padding: clamp(13px,3.5vw,16px);
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      margin-top: 24px;
+      margin-top: clamp(18px,5vw,28px);
       transition: opacity .2s;
     }
-    .btn-submit:hover { opacity: .85; }
+    .btn-submit:hover { opacity: .82; }
 
     .form-success {
       display: none;
-      text-align: center;
       padding: 20px 0;
+      text-align: center;
     }
     .form-success.show { display: block; }
     .form-success p {
       font-family: 'Great Vibes', cursive;
-      font-size: 2rem;
+      font-size: clamp(1.8rem, 7vw, 2.4rem);
       color: var(--burgundy);
     }
 
-    /* ══ SCREEN 6 · FOOTER ══ */
+    /* ════════════════════════════════════
+       СЕКЦИЯ 6 · FOOTER
+    ════════════════════════════════════ */
     .footer-section {
       position: relative;
     }
     .footer-photo {
       width: 100%;
       display: block;
-      height: 240px;
+      aspect-ratio: 16/9;
       object-fit: cover;
       object-position: center 20%;
     }
-    .footer-text {
+    .footer-caption {
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 20px;
+      padding: 0 16px;
     }
-    .footer-text span {
+    .footer-caption span {
       font-family: 'Great Vibes', cursive;
-      font-size: 2.2rem;
+      font-size: clamp(1.6rem, 6vw, 2.4rem);
       color: var(--burgundy);
       text-align: center;
-      text-shadow: 0 1px 8px rgba(245,237,224,.6);
+      text-shadow: 0 1px 12px rgba(245,237,224,.7);
     }
 
-    /* SVG декор (ветки) */
-    svg.deco { overflow: visible; }
+    /* ════════════════════════════════════
+       ДЕСКТОП — плашка вокруг карточки
+    ════════════════════════════════════ */
+    @media (min-width: 481px) {
+      html { display: flex; justify-content: center; align-items: flex-start; }
+      body {
+        margin: 32px auto;
+        border-radius: 4px;
+        min-height: auto;
+      }
+    }
   </style>
 </head>
 <body>
 
-<!-- ══ HERO ══ -->
+<!-- ════ HERO ════ -->
 <section class="hero">
 
-  <!-- Декор: ветки справа сверху -->
-  <svg class="hero-deco-br" viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M140 5 Q120 40 100 60 Q80 80 110 100 Q130 115 120 140 Q110 160 90 170" stroke="#C8B89A" stroke-width="1.5" fill="none"/>
-    <path d="M100 60 Q85 50 75 35" stroke="#C8B89A" stroke-width="1" fill="none"/>
-    <path d="M110 100 Q125 90 135 75" stroke="#C8B89A" stroke-width="1" fill="none"/>
-    <path d="M120 140 Q135 130 148 120" stroke="#C8B89A" stroke-width="1" fill="none"/>
-    <ellipse cx="75" cy="33" rx="7" ry="5" transform="rotate(-30 75 33)" fill="#C8B89A" opacity=".6"/>
-    <ellipse cx="137" cy="74" rx="6" ry="4" transform="rotate(20 137 74)" fill="#C8B89A" opacity=".6"/>
-    <ellipse cx="150" cy="119" rx="6" ry="4" transform="rotate(10 150 119)" fill="#C8B89A" opacity=".6"/>
-    <!-- маленькие листики -->
-    <ellipse cx="108" cy="58" rx="5" ry="3" transform="rotate(-50 108 58)" fill="#C8B89A" opacity=".5"/>
-    <ellipse cx="92" cy="168" rx="5" ry="3" transform="rotate(10 92 168)" fill="#C8B89A" opacity=".5"/>
-    <!-- кольцо/сердце -->
-    <circle cx="148" cy="8" r="6" stroke="#C8B89A" stroke-width="1.2" fill="none"/>
-    <circle cx="145" cy="5" r="4" stroke="#C8B89A" stroke-width="1" fill="none"/>
+  <!-- Декор ветки (SVG) -->
+  <svg class="deco-branch" viewBox="0 0 160 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M145 4 Q122 42 100 65 Q78 88 108 108 Q132 122 122 148 Q112 168 88 180" stroke="#C4A882" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <path d="M100 65 Q84 52 72 34" stroke="#C4A882" stroke-width="1" fill="none" stroke-linecap="round"/>
+    <path d="M108 108 Q126 96 140 78" stroke="#C4A882" stroke-width="1" fill="none" stroke-linecap="round"/>
+    <path d="M122 148 Q138 136 152 124" stroke="#C4A882" stroke-width="1" fill="none" stroke-linecap="round"/>
+    <ellipse cx="71" cy="32" rx="8" ry="5" transform="rotate(-35 71 32)" fill="#C4A882" opacity=".55"/>
+    <ellipse cx="141" cy="77" rx="7" ry="4" transform="rotate(22 141 77)" fill="#C4A882" opacity=".55"/>
+    <ellipse cx="154" cy="122" rx="7" ry="4" transform="rotate(12 154 122)" fill="#C4A882" opacity=".55"/>
+    <ellipse cx="106" cy="62" rx="5" ry="3" transform="rotate(-52 106 62)" fill="#C4A882" opacity=".45"/>
+    <ellipse cx="88" cy="178" rx="5" ry="3" transform="rotate(8 88 178)" fill="#C4A882" opacity=".45"/>
+    <!-- кольца вверху -->
+    <circle cx="152" cy="8" r="7" stroke="#C4A882" stroke-width="1.2" fill="none"/>
+    <circle cx="148" cy="4" r="5" stroke="#C4A882" stroke-width="1" fill="none"/>
   </svg>
 
-  <!-- Имена -->
-  <div class="hero-names">
-    Мариясена<br/>Василий
-  </div>
+  <h1 class="hero-names">Мариясена<br/>Василий</h1>
 
-  <!-- Фото пары -->
   <img class="hero-photo" src="images/hero.jpg" alt="Мариясена и Василий" />
 
-  <!-- мы женимся! -->
   <p class="hero-subtitle">мы женимся!</p>
 
-  <!-- Календарь -->
   <div class="calendar">
-    <div class="cal-days-row">
+    <div class="cal-row days">
       <span>ПН</span><span>ВТ</span><span>СР</span><span>ЧТ</span><span>ПТ</span><span>СБ</span><span>ВС</span>
     </div>
-    <div class="cal-nums-row">
+    <div class="cal-row nums">
       <span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span class="today">01</span><span>02</span>
     </div>
-    <div class="cal-month">August</div>
+    <p class="cal-month">August</p>
   </div>
 
-  <!-- Текст приглашения -->
   <p class="hero-invite">
-    Этот день невозможно представить без самых<br/>
-    близких для нас людей, мы бы очень хотели,<br/>
-    чтобы вы разделили его вместе с нами
+    Этот день невозможно представить без самых близких для нас людей, мы бы очень хотели, чтобы вы разделили его вместе с нами
   </p>
 </section>
 
-<!-- ══ ПРОГРАММА ТОРЖЕСТВА ══ -->
+<!-- ════ ПРОГРАММА ════ -->
 <section class="program-section">
-  <p class="program-title">Программа торжества</p>
+  <p class="section-script">Программа торжества</p>
 
   <div class="program-photo-wrap">
     <img class="program-photo" src="images/program.jpg" alt="Программа" />
-    <!-- расписание поверх фото -->
+
     <div class="schedule-overlay">
-      <div class="sched-row">
-        <span class="sched-time">16.00</span>
-        <span class="sched-event">СБОР ГОСТЕЙ</span>
-      </div>
-      <div class="sched-row">
-        <span class="sched-time">17.00</span>
-        <span class="sched-event">ЦЕРЕМОНИЯ</span>
-      </div>
-      <div class="sched-row">
-        <span class="sched-time">17.50</span>
-        <span class="sched-event">БАНКЕТ</span>
-      </div>
-      <div class="sched-row">
-        <span class="sched-time">23.00</span>
-        <span class="sched-event">ФИНАЛ</span>
-      </div>
+      <div class="sched-row"><span class="sched-time">16.00</span><span class="sched-event">СБОР ГОСТЕЙ</span></div>
+      <div class="sched-row"><span class="sched-time">17.00</span><span class="sched-event">ЦЕРЕМОНИЯ</span></div>
+      <div class="sched-row"><span class="sched-time">17.50</span><span class="sched-event">БАНКЕТ</span></div>
+      <div class="sched-row"><span class="sched-time">23.00</span><span class="sched-event">ФИНАЛ</span></div>
     </div>
-    <!-- This is love -->
+
     <div class="this-is-love">
       <span>This</span>
       <span>is love</span>
@@ -568,23 +554,19 @@
   </div>
 </section>
 
-<!-- ══ МЕСТО ПРОВЕДЕНИЯ ══ -->
+<!-- ════ МЕСТО ПРОВЕДЕНИЯ ════ -->
 <section class="venue-section">
-  <p class="venue-title">Место проведения</p>
+  <p class="section-script">Место проведения</p>
   <p class="venue-name">Лофт-площадка Депо</p>
   <p class="venue-address">г. Якутск, ул. 50 лет Советской Армии, 1а</p>
-  <a
-    href="https://yandex.ru/maps/?text=Якутск+ул.+50+лет+Советской+Армии+1а"
-    target="_blank"
-    class="btn-map"
-  >Посмотреть на карте</a>
+  <a href="https://yandex.ru/maps/?text=Якутск+ул.+50+лет+Советской+Армии+1а" target="_blank" class="btn-map">Посмотреть на карте</a>
 </section>
 
-<!-- ══ ДРЕСС-КОД ══ -->
-<section class="dresscode-section">
+<!-- ════ ДРЕСС-КОД ════ -->
+<section>
   <img class="dresscode-photo" src="images/dresscode.jpg" alt="Дресс-код" />
   <div class="dresscode-content">
-    <p class="dresscode-title">Дресс-код</p>
+    <p class="section-script">Дресс-код</p>
     <p class="dresscode-text">Мы будем рады, если вы поддержите<br/>цветовую палитру нашей свадьбы</p>
     <div class="palette">
       <div class="swatch">
@@ -600,7 +582,7 @@
         <span class="swatch-label">chocolite</span>
       </div>
       <div class="swatch">
-        <div class="swatch-circle" style="background:#F0EAD8; border:1px solid #D8CFC4;"></div>
+        <div class="swatch-circle" style="background:#F0EAD8; border:1px solid #D4C8BA;"></div>
         <span class="swatch-label">cream</span>
       </div>
       <div class="swatch">
@@ -615,21 +597,23 @@
   </div>
 </section>
 
-<!-- ══ НЕСКОЛЬКО ДЕТАЛЕЙ ══ -->
+<!-- ════ НЕСКОЛЬКО ДЕТАЛЕЙ ════ -->
+<!-- Фото = полный фон. Весь контент поверх -->
 <section class="details-section">
-  <img class="details-photo" src="images/details.jpg" alt="Детали" />
-  <div class="details-overlay">
+  <img class="details-bg" src="images/details.jpg" alt="" aria-hidden="true" />
+  <div class="details-inner">
     <p class="details-title">Несколько деталей</p>
-  </div>
-  <div class="details-content">
+
     <div class="detail-block">
       <h3>Подарки</h3>
       <p>Ваши искренние пожелания мы сохраним в сердце, а в качестве подарка будем рады вкладу в наше будущее в конверте</p>
     </div>
+
     <div class="detail-block">
       <h3>Маленькие гости</h3>
       <p>Чтобы мы могли в полной мере насладиться вечером, мы решили провести праздник без маленьких детей. Надеемся на ваше понимание и будем рады видеть вас!</p>
     </div>
+
     <div class="detail-block">
       <h3>Пожелания</h3>
       <p>Просим поддержать наше решение провести этот праздник без традиционных выкриков «Горько!». Пусть наши поцелуи останутся личным моментом.</p>
@@ -637,9 +621,9 @@
   </div>
 </section>
 
-<!-- ══ RSVP ══ -->
+<!-- ════ RSVP ════ -->
 <section class="rsvp-section">
-  <p class="rsvp-title">Вы будете с нами?</p>
+  <p class="section-script">Вы будете с нами?</p>
   <p class="rsvp-subtitle">
     Очень ждем вашего ответа<br/>
     до 30 июня. Заполнить и отправить<br/>
@@ -647,27 +631,28 @@
   </p>
 
   <form class="rsvp-form" id="rsvpForm" onsubmit="submitForm(event)">
+
     <div class="form-block">
       <label class="form-label">ФИО</label>
       <input class="form-input" type="text" name="name" required />
     </div>
 
     <div class="form-block">
-      <p class="attendance-question">Сможете ли вы прийти на нашу свадьбу?</p>
-      <div class="radio-options">
+      <p class="attendance-q">Сможете ли вы прийти на нашу свадьбу?</p>
+      <div class="radio-box">
         <label class="radio-opt">
           <input type="radio" name="attendance" value="yes" required />
-          <span class="radio-dot"></span>
+          <span class="radio-mark"></span>
           <span>Да, смогу</span>
         </label>
         <label class="radio-opt">
           <input type="radio" name="attendance" value="maybe" />
-          <span class="radio-dot"></span>
+          <span class="radio-mark"></span>
           <span>Пока не уверен(а)</span>
         </label>
         <label class="radio-opt">
           <input type="radio" name="attendance" value="no" />
-          <span class="radio-dot"></span>
+          <span class="radio-mark"></span>
           <span>К сожалению, не смогу</span>
         </label>
       </div>
@@ -686,10 +671,10 @@
   </div>
 </section>
 
-<!-- ══ FOOTER ══ -->
+<!-- ════ FOOTER ════ -->
 <section class="footer-section">
   <img class="footer-photo" src="images/footer.jpg" alt="Мариясена и Василий" />
-  <div class="footer-text">
+  <div class="footer-caption">
     <span>Будем счастливы видеть Вас!</span>
   </div>
 </section>
@@ -700,6 +685,18 @@
     document.getElementById('rsvpForm').style.display = 'none';
     document.getElementById('formSuccess').classList.add('show');
   }
+
+  /* radio — визуально обновляем точку */
+  document.querySelectorAll('.radio-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      opt.closest('.radio-box').querySelectorAll('.radio-mark').forEach(m => {
+        m.style.background = 'var(--text)';
+        m.style.opacity = '.55';
+      });
+      opt.querySelector('.radio-mark').style.background = 'var(--burgundy)';
+      opt.querySelector('.radio-mark').style.opacity = '1';
+    });
+  });
 </script>
 
 </body>
