@@ -6,9 +6,28 @@
   <title>Мариясена & Василий</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+  <!-- Vollkorn (Google Fonts) для основного текста; Marianna подключается локально через @font-face -->
+  <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Шрифт Marianna (положите файлы в fonts/) ── */
+    @font-face {
+      font-family: 'Marianna';
+      src: url('fonts/Marianna-Regular.woff2') format('woff2'),
+           url('fonts/Marianna-Regular.woff')  format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Marianna';
+      src: url('fonts/Marianna-Bold.woff2') format('woff2'),
+           url('fonts/Marianna-Bold.woff')  format('woff');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
 
     :root {
       --cream:    #F5EDE0;
@@ -16,6 +35,9 @@
       --text:     #2A1515;
       --rose:     #C0607A;
       --grey:     #888;
+      /* Шрифты: заголовки/разделы — Marianna; обычный текст — Vollkorn */
+      --font-head: 'Marianna', 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Vollkorn', Georgia, serif;
     }
 
     html { background: #E8DDD0; min-height: 100%; }
@@ -23,8 +45,8 @@
     body {
       background: var(--cream);
       color: var(--text);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
+      font-family: var(--font-body);
+      font-weight: 400;
       max-width: 480px;
       margin: 0 auto;
       overflow-x: hidden;
@@ -96,7 +118,7 @@
       z-index: 1;
     }
     .hero-names {
-      font-family: 'Great Vibes', cursive;
+      font-family: var(--font-head);
       font-size: clamp(2rem,10vw,3.2rem);
       color: var(--burgundy);
       line-height: 1.2;
@@ -135,7 +157,7 @@
     }
 
     .hero-subtitle {
-      font-family: 'Great Vibes', cursive;
+      font-family: var(--font-head);
       font-size: clamp(1.5rem,6vw,2rem);
       color: var(--burgundy);
       margin: clamp(12px,4vw,20px) 0 clamp(10px,3vw,14px);
@@ -153,7 +175,7 @@
       letter-spacing: .02em;
     }
     .cal-row.nums span {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-head);
       font-size: clamp(.9rem,3.5vw,1.15rem);
       line-height: 2;
     }
@@ -171,7 +193,7 @@
       background: var(--burgundy);
     }
     .cal-month {
-      font-family: 'Great Vibes', cursive;
+      font-family: var(--font-head);
       font-size: clamp(1.3rem,5vw,1.7rem);
       color: var(--burgundy);
       margin-top: 2px;
@@ -191,7 +213,7 @@
       overflow: hidden;
     }
     .section-script {
-      font-family: 'Great Vibes', cursive;
+      font-family: var(--font-head);
       font-size: clamp(1.8rem,7vw,2.6rem);
       color: var(--burgundy);
       margin-bottom: clamp(14px,4vw,22px);
@@ -224,7 +246,7 @@
     }
     .sched-row.visible { opacity: 1; transform: translateX(0); }
     .sched-time {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-head);
       font-size: clamp(1.1rem,4.5vw,1.6rem);
       color: rgba(255,255,255,.92);
       font-style: italic;
@@ -248,7 +270,7 @@
       pointer-events: none;
     }
     .this-is-love span {
-      font-family: 'Great Vibes', cursive;
+      font-family: var(--font-head);
       font-size: clamp(.8rem,3vw,1.1rem);
       color: var(--rose);
       line-height: 1.6;
@@ -264,7 +286,7 @@
       text-align: center;
     }
     .venue-name {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-head);
       font-size: clamp(.95rem,3.5vw,1.1rem);
       font-weight: 500; margin-bottom: 6px;
     }
@@ -325,7 +347,7 @@
       box-shadow: 0 8px 24px rgba(0,0,0,.18);
     }
     .swatch-label {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-head);
       font-style: italic;
       font-size: clamp(.78rem,2.6vw,.95rem);
       color: #8A6F5E;
@@ -470,7 +492,7 @@
       text-align: center;
     }
     .details-title {
-      font-family: 'Great Vibes', cursive;
+      font-family: var(--font-head);
       font-size: clamp(2rem,8vw,2.8rem);
       color: var(--burgundy);
       margin-bottom: clamp(18px,5vw,28px);
@@ -478,7 +500,7 @@
     .detail-block { margin-bottom: clamp(18px,5vw,26px); }
     .detail-block:last-child { margin-bottom: 0; }
     .detail-block h3 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-head);
       font-size: clamp(.95rem,3.5vw,1.1rem);
       font-weight: 500; margin-bottom: 6px;
     }
@@ -512,9 +534,9 @@
       border: 1.5px solid #D4C8BA;
       border-radius: clamp(8px,3vw,14px);
       padding: clamp(11px,3vw,15px) clamp(12px,4vw,18px);
-      font-family: 'Montserrat', sans-serif;
+      font-family: var(--font-body);
       font-size: clamp(.78rem,2.8vw,.88rem);
-      font-weight: 300; color: var(--text);
+      font-weight: 400; color: var(--text);
       outline: none;
       transition: border-color .25s, box-shadow .25s;
     }
@@ -557,7 +579,7 @@
     .btn-submit {
       display: block; width: 100%;
       background: var(--burgundy); color: #fff;
-      font-family: 'Montserrat', sans-serif;
+      font-family: var(--font-body);
       font-size: clamp(.75rem,2.5vw,.85rem);
       font-weight: 400; letter-spacing: .05em;
       padding: clamp(13px,3.5vw,16px);
@@ -574,7 +596,7 @@
     .form-success { display: none; padding: 20px 0; text-align: center; }
     .form-success.show { display: block; }
     .form-success p {
-      font-family: 'Great Vibes', cursive;
+      font-family: var(--font-head);
       font-size: clamp(1.8rem,7vw,2.4rem);
       color: var(--burgundy);
     }
@@ -587,7 +609,7 @@
       overflow: hidden;
     }
     .footer-heading {
-      font-family: 'Great Vibes', cursive;
+      font-family: var(--font-head);
       font-size: clamp(1.7rem,6.5vw,2.5rem);
       color: var(--burgundy);
       text-align: center;
@@ -619,12 +641,12 @@
       letter-spacing: .12em; text-transform: uppercase; color: var(--grey);
     }
     .contact-name {
-      font-family: 'Great Vibes', cursive;
+      font-family: var(--font-head);
       font-size: clamp(1.5rem,5.5vw,2rem);
       color: var(--burgundy); line-height: 1.1;
     }
     .contact-phone {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-head);
       font-size: clamp(1rem,3.5vw,1.2rem);
       color: var(--text); text-decoration: none;
       transition: color .2s;
