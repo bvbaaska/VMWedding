@@ -165,6 +165,7 @@
     .program-section {
       background: var(--cream);
       padding: clamp(28px,7vw,48px) clamp(16px,5vw,24px) 0;
+      overflow: hidden;
     }
     .section-script {
       font-family: 'Great Vibes', cursive;
@@ -174,7 +175,7 @@
     }
     .program-photo-wrap {
       position: relative;
-      margin: 0 clamp(-24px,-5vw,-16px);
+      margin: 0 calc(-1 * clamp(16px,5vw,24px));
       overflow: hidden;
     }
     .program-photo {
