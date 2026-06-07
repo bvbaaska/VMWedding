@@ -547,6 +547,59 @@
       text-shadow: 0 1px 12px rgba(245,237,224,.7);
     }
 
+    /* Контакты */
+    .footer-contacts {
+      background: var(--cream);
+      padding: clamp(28px,7vw,40px) clamp(16px,5vw,24px) clamp(32px,8vw,48px);
+      text-align: center;
+    }
+    .footer-contacts-grid {
+      display: flex;
+      justify-content: center;
+      gap: clamp(24px,8vw,48px);
+      flex-wrap: wrap;
+    }
+    .contact-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .contact-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.5rem, 5.5vw, 2rem);
+      color: var(--burgundy);
+      line-height: 1.1;
+    }
+    .contact-role {
+      font-size: clamp(.62rem, 2vw, .72rem);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 4px;
+    }
+    .contact-phone {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3.5vw, 1.2rem);
+      color: var(--text);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .contact-phone:hover { color: var(--burgundy); }
+    .footer-divider {
+      width: 40px;
+      height: 1px;
+      background: #C4A882;
+      margin: clamp(20px,5vw,28px) auto;
+      opacity: .6;
+    }
+    .footer-love {
+      font-size: clamp(.65rem, 2vw, .75rem);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+
     /* ════════════════════════════════════
        ДЕСКТОП — плашка вокруг карточки
     ════════════════════════════════════ */
@@ -783,6 +836,24 @@
     <span>Будем счастливы видеть Вас!</span>
   </div>
 </section>
+
+<!-- Контакты -->
+<footer class="footer-contacts">
+  <div class="footer-contacts-grid">
+    <div class="contact-card">
+      <span class="contact-role">невеста</span>
+      <span class="contact-name">Мариясена</span>
+      <a class="contact-phone" href="tel:+79142793360">8 914 279-33-60</a>
+    </div>
+    <div class="contact-card">
+      <span class="contact-role">жених</span>
+      <span class="contact-name">Василий</span>
+      <a class="contact-phone" href="tel:+79143032654">8 914 303-26-54</a>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <p class="footer-love">С любовью — Мариясена и Василий</p>
+</footer>
 
 <script>
   function openLightbox(src) {
