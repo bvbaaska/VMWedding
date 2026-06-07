@@ -118,6 +118,14 @@
       pointer-events: none;
       z-index: 4;                      /* наслаивается на соседние элементы */
       mix-blend-mode: multiply;        /* убирает белый фон png на кремовом */
+      animation: floatHands 6s ease-in-out infinite;
+    }
+    @keyframes floatHands {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-7px) rotate(-1.5deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .deco-hands { animation: none; }
     }
     .hero-names {
       font-family: var(--font-head);
@@ -127,7 +135,7 @@
       margin-bottom: clamp(8px,3vw,14px);
       position: relative; z-index: 2;
       width: fit-content;
-      text-align: center;        /* «Василий» центрируется под «Мариясена» */
+      text-align: left;          /* «Василий» прижат влево под «Мариясена» */
       padding-left: clamp(6px,3vw,18px);
     }
     /* обёртка фото — обрезает нижнюю чёрную полоску + alpha-маска углов */
@@ -138,11 +146,13 @@
       aspect-ratio: 3/4;
       overflow: hidden;
       border-radius: clamp(10px,4vw,24px);
-      /* alpha-маска: мягко срезает/растворяет углы фото */
+      /* выразительная виньетка с растворением краёв в фон */
       -webkit-mask-image:
-        radial-gradient(ellipse 90% 92% at 50% 48%, #000 64%, rgba(0,0,0,0) 100%);
+        radial-gradient(ellipse 86% 88% at 50% 46%,
+          #000 42%, rgba(0,0,0,.65) 70%, rgba(0,0,0,0) 100%);
       mask-image:
-        radial-gradient(ellipse 90% 92% at 50% 48%, #000 64%, rgba(0,0,0,0) 100%);
+        radial-gradient(ellipse 86% 88% at 50% 46%,
+          #000 42%, rgba(0,0,0,.65) 70%, rgba(0,0,0,0) 100%);
       -webkit-mask-repeat: no-repeat;
       mask-repeat: no-repeat;
     }
@@ -191,9 +201,10 @@
       position: absolute;
       top: 48%; left: 50%;
       transform: translate(-50%, -50%);
-      width: clamp(34px,9.5vw,46px);
-      height: clamp(34px,9.5vw,46px);
-      background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%237B1A3A'%20stroke-width='1.4'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M12%2020.3C12%2020.3%203%2014.5%203%208.8C3%206.1%205.1%204%207.7%204C9.5%204%2011%205%2012%206.7C13%205%2014.5%204%2016.3%204C18.9%204%2021%206.1%2021%208.8C21%2014.5%2012%2020.3%2012%2020.3Z'/%3E%3C/svg%3E");
+      width: clamp(38px,10.5vw,52px);
+      height: clamp(38px,10.5vw,52px);
+      /* сердце в стиле каллиграфии пером — незамкнутый, с лёгким росчерком */
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2048%2044'%20fill='none'%20stroke='%237B1A3A'%20stroke-width='1.4'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M24%2038C24%2038%207%2027%205%2015C3.6%207%208%202%2014%203C19%203.8%2022%208%2024%2013C26%208%2029%203.6%2034%203C40%202%2044.4%207%2043%2015C41.4%2024%2030%2032%2026%2035'/%3E%3Cpath%20d='M26%2035C28%2034%2031%2034.5%2032.5%2036.5'%20stroke-width='1'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
@@ -250,16 +261,26 @@
       position: absolute; inset: 0;
       display: flex; flex-direction: column;
       justify-content: center;
+      align-items: flex-start;
       padding: clamp(16px,5vw,28px) clamp(14px,5vw,24px);
-      gap: clamp(10px,3vw,18px);
+      gap: clamp(8px,2.5vw,14px);
     }
+    /* матовые стеклянные плашки расписания */
     .sched-row {
       display: flex; align-items: baseline;
       gap: clamp(10px,3vw,18px);
+      width: fit-content;
+      padding: clamp(7px,2.2vw,11px) clamp(14px,4vw,22px);
+      background: rgba(30,16,16,.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
       opacity: 0; transform: translateX(-20px);
-      transition: opacity .6s ease, transform .6s ease;
+      transition: opacity .6s ease, transform .6s ease, box-shadow .3s ease;
     }
     .sched-row.visible { opacity: 1; transform: translateX(0); }
+    .sched-row:hover { box-shadow: 0 8px 24px rgba(0,0,0,.22); }
     .sched-time {
       font-family: var(--font-head);
       font-size: clamp(1.5rem,6vw,2.1rem);
@@ -276,12 +297,12 @@
     }
     .this-is-love {
       position: absolute;
-      left: clamp(10px,4vw,24px);
-      bottom: clamp(34px,14vw,90px);
+      right: clamp(6px,3vw,18px);
+      bottom: clamp(12px,5vw,28px);
       display: flex; flex-direction: column;
-      align-items: flex-start;
-      transform: rotate(45deg);
-      transform-origin: bottom left;
+      align-items: flex-end;
+      transform: rotate(-90deg);
+      transform-origin: bottom right;
       pointer-events: none;
       z-index: 3;
     }
@@ -680,23 +701,55 @@
       font-size: clamp(.62rem,2vw,.72rem);
       letter-spacing: .15em; text-transform: uppercase; color: var(--grey);
     }
-    /* Счётчик дней */
+    /* Живой счётчик */
     .countdown {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2px;
+      gap: 10px;
     }
-    .countdown-num {
+    .countdown-units {
+      display: flex;
+      gap: clamp(6px,2vw,12px);
+    }
+    .cd-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-width: clamp(56px,17vw,72px);
+      padding: clamp(10px,3vw,14px) clamp(6px,2vw,10px);
+      /* матовое стекло */
+      background: rgba(255,255,255,.35);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(123,26,58,.08);
+      transition: transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease;
+    }
+    .cd-cell:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(123,26,58,.16);
+    }
+    .cd-val {
       font-family: var(--font-head);
-      font-size: clamp(2.6rem,11vw,3.6rem);
+      font-size: clamp(1.8rem,7vw,2.6rem);
       color: var(--burgundy);
       line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .cd-lab {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(.6rem,2vw,.72rem);
+      color: var(--text);
+      text-transform: lowercase;
     }
     .countdown-label {
       font-family: var(--font-body);
       font-style: italic;
-      font-size: clamp(.82rem,2.8vw,.98rem);
+      font-size: clamp(.9rem,3vw,1.05rem);
       color: var(--text);
     }
 
@@ -988,7 +1041,7 @@
 <section class="carousel-section">
   <div class="carousel-track-wrap" id="carouselWrap">
     <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in; object-position: 65% center;" /></div>
+      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in; object-position: 32% center;" /></div>
       <div class="carousel-slide"><img src="images/gallery2.jpg" alt="Фото 2" onclick="openLightbox(1)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery3.jpg" alt="Фото 3" onclick="openLightbox(2)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery4.jpg" alt="Фото 4" onclick="openLightbox(3)" style="cursor:zoom-in;" /></div>
@@ -1083,10 +1136,15 @@
 </section>
 
 <footer class="footer-contacts">
-  <!-- Счётчик дней до свадьбы -->
+  <!-- Живой счётчик до свадьбы -->
   <div class="countdown reveal">
-    <span class="countdown-num" id="countdownNum">—</span>
-    <span class="countdown-label" id="countdownLabel">дней до нашей свадьбы</span>
+    <div class="countdown-units" id="countdownUnits">
+      <div class="cd-cell"><span class="cd-val" id="cdDays">—</span><span class="cd-lab" id="cdDaysLab">дней</span></div>
+      <div class="cd-cell"><span class="cd-val" id="cdHours">—</span><span class="cd-lab">часов</span></div>
+      <div class="cd-cell"><span class="cd-val" id="cdMins">—</span><span class="cd-lab">минут</span></div>
+      <div class="cd-cell"><span class="cd-val" id="cdSecs">—</span><span class="cd-lab">секунд</span></div>
+    </div>
+    <span class="countdown-label" id="countdownLabel">до нашей свадьбы</span>
   </div>
   <div class="footer-divider"></div>
 
@@ -1211,29 +1269,42 @@ function submitForm(e) {
    СЧЁТЧИК ДНЕЙ ДО СВАДЬБЫ (01.08.2026)
 ═══════════════════════════════════════ */
 (function(){
-  const target = new Date(2026, 7, 1); // 1 августа 2026 (месяцы с 0)
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const days = Math.round((target - today) / 86400000);
-  const numEl = document.getElementById('countdownNum');
+  const target = new Date(2026, 7, 1, 16, 0, 0); // 1 августа 2026, 16:00 (сбор гостей)
+  const dEl = document.getElementById('cdDays');
+  const hEl = document.getElementById('cdHours');
+  const mEl = document.getElementById('cdMins');
+  const sEl = document.getElementById('cdSecs');
+  const daysLab = document.getElementById('cdDaysLab');
+  const units = document.getElementById('countdownUnits');
   const labEl = document.getElementById('countdownLabel');
-  function plural(n) {
+  function pluralDays(n) {
     const a = Math.abs(n) % 100, b = a % 10;
     if (a > 10 && a < 20) return 'дней';
     if (b > 1 && b < 5) return 'дня';
     if (b === 1) return 'день';
     return 'дней';
   }
-  if (days > 0) {
-    numEl.textContent = days;
-    labEl.textContent = plural(days) + ' до нашей свадьбы';
-  } else if (days === 0) {
-    numEl.textContent = '♥';
-    labEl.textContent = 'сегодня наш день!';
-  } else {
-    numEl.textContent = '♥';
-    labEl.textContent = 'мы поженились!';
+  const pad = n => String(n).padStart(2, '0');
+  function tick() {
+    const diff = target - new Date();
+    if (diff <= 0) {
+      units.style.display = 'none';
+      labEl.textContent = 'мы поженились! ♥';
+      clearInterval(timer);
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor(diff % 86400000 / 3600000);
+    const m = Math.floor(diff % 3600000 / 60000);
+    const s = Math.floor(diff % 60000 / 1000);
+    dEl.textContent = d;
+    hEl.textContent = pad(h);
+    mEl.textContent = pad(m);
+    sEl.textContent = pad(s);
+    daysLab.textContent = pluralDays(d);
   }
+  tick();
+  const timer = setInterval(tick, 1000);
 })();
 
 /* ═══════════════════════════════════════
