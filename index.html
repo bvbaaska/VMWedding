@@ -619,34 +619,40 @@
     }
 
     /* ══════════════════════════════════════════
-       КНОПКА ЗВУКА (фиксированная)
+       КНОПКА ЗВУКА (внутри карточки сайта)
     ══════════════════════════════════════════ */
     .sound-toggle {
       position: fixed;
-      top: 16px; right: 16px;
-      width: 46px; height: 46px;
+      top: 18px;
+      /* всегда внутри карточки 480px, прижата к её правому краю */
+      left: 50%;
+      transform: translateX(calc(240px - 56px - 18px));
+      width: 56px; height: 56px;
       border-radius: 50%;
-      background: rgba(123,26,58,.9);
-      border: none;
+      background: var(--burgundy);
+      border: 2px solid rgba(255,255,255,.85);
       cursor: pointer;
       z-index: 900;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+      box-shadow: 0 6px 20px rgba(42,21,21,.28);
       transition: transform .2s, background .2s;
-      -webkit-backdrop-filter: blur(6px);
-      backdrop-filter: blur(6px);
     }
-    /* центрируем относительно карточки на десктопе */
-    @media (min-width: 481px) {
+    /* на узких экранах прижимаем к правому краю окна */
+    @media (max-width: 520px) {
       .sound-toggle {
-        right: max(16px, calc(50% - 240px + 16px));
+        left: auto;
+        right: 16px;
+        transform: none;
       }
     }
-    .sound-toggle:hover { transform: scale(1.08); background: var(--burgundy); }
-    .sound-toggle:active { transform: scale(.94); }
-    .sound-toggle svg { width: 20px; height: 20px; fill: #fff; }
+    .sound-toggle:hover { transform: translateX(calc(240px - 56px - 18px)) scale(1.08); background: #8e1f44; }
+    @media (max-width: 520px) {
+      .sound-toggle:hover { transform: scale(1.08); }
+    }
+    .sound-toggle:active { filter: brightness(.92); }
+    .sound-toggle svg { width: 24px; height: 24px; fill: #fff; }
     .sound-toggle .icon-off { display: none; }
     .sound-toggle.muted .icon-on  { display: none; }
     .sound-toggle.muted .icon-off { display: block; }
