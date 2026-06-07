@@ -16,32 +16,69 @@
       --text:     #2A1515;
       --rose:     #C0607A;
       --grey:     #888;
-      --card-w:   480px;
     }
 
-    /* ─── Глобальный wrapper — центрирует на десктопе ─── */
-    html {
-      background: #E8DDD0;
-      min-height: 100%;
-    }
+    html { background: #E8DDD0; min-height: 100%; }
 
     body {
       background: var(--cream);
       color: var(--text);
       font-family: 'Montserrat', sans-serif;
       font-weight: 300;
-      width: 100%;
-      max-width: var(--card-w);
+      max-width: 480px;
       margin: 0 auto;
       overflow-x: hidden;
-      /* тень чтобы на десктопе выглядело как карточка */
-      box-shadow: 0 0 60px rgba(0,0,0,.12);
+      box-shadow: 0 0 80px rgba(0,0,0,.14);
       min-height: 100vh;
     }
 
-    /* ════════════════════════════════════
-       СЕКЦИЯ 1 · HERO
-    ════════════════════════════════════ */
+    @media (min-width: 481px) {
+      body { margin: 32px auto; border-radius: 6px; min-height: auto; }
+    }
+
+    /* ══════════════════════════════════════════
+       APPLE-STYLE АНИМАЦИИ ПОЯВЛЕНИЯ
+    ══════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity .75s cubic-bezier(.22,.61,.36,1),
+                  transform .75s cubic-bezier(.22,.61,.36,1);
+      will-change: opacity, transform;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(.94);
+      transition: opacity .8s cubic-bezier(.22,.61,.36,1),
+                  transform .8s cubic-bezier(.22,.61,.36,1);
+      will-change: opacity, transform;
+    }
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-28px);
+      transition: opacity .7s cubic-bezier(.22,.61,.36,1),
+                  transform .7s cubic-bezier(.22,.61,.36,1);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+    .delay-1 { transition-delay: .1s; }
+    .delay-2 { transition-delay: .2s; }
+    .delay-3 { transition-delay: .3s; }
+    .delay-4 { transition-delay: .4s; }
+    .delay-5 { transition-delay: .5s; }
+    .delay-6 { transition-delay: .6s; }
+
+    /* ══════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════ */
     .hero {
       background: var(--cream);
       padding: clamp(20px,5vw,32px) clamp(16px,5vw,24px) clamp(16px,4vw,24px);
@@ -49,25 +86,20 @@
       text-align: center;
       overflow: hidden;
     }
-
-    /* SVG декор ветки — правый верхний угол */
     .deco-branch {
       position: absolute;
       top: 0; right: 0;
-      width: clamp(80px, 25%, 120px);
+      width: clamp(80px,25%,120px);
       pointer-events: none;
     }
-
     .hero-names {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(2rem, 10vw, 3.2rem);
+      font-size: clamp(2rem,10vw,3.2rem);
       color: var(--burgundy);
       line-height: 1.2;
       margin-bottom: clamp(8px,3vw,14px);
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
     }
-
     .hero-photo {
       display: block;
       width: calc(100% + clamp(32px,10vw,48px));
@@ -75,36 +107,31 @@
       aspect-ratio: 3/4;
       object-fit: cover;
       object-position: center top;
+      transition: transform .6s cubic-bezier(.22,.61,.36,1);
     }
+    .hero-photo:hover { transform: scale(1.015); }
 
     .hero-subtitle {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(1.5rem, 6vw, 2rem);
+      font-size: clamp(1.5rem,6vw,2rem);
       color: var(--burgundy);
       margin: clamp(12px,4vw,20px) 0 clamp(10px,3vw,14px);
     }
-
-    /* ─── Календарь ─── */
-    .calendar {
-      display: inline-block;
-    }
+    .calendar { display: inline-block; }
     .cal-row {
       display: grid;
       grid-template-columns: repeat(7, clamp(28px,8vw,38px));
       text-align: center;
     }
     .cal-row.days span {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(.55rem, 2vw, .7rem);
+      font-size: clamp(.55rem,2vw,.7rem);
       font-weight: 500;
-      color: var(--text);
       padding-bottom: 4px;
       letter-spacing: .02em;
     }
     .cal-row.nums span {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(.9rem, 3.5vw, 1.15rem);
-      color: var(--text);
+      font-size: clamp(.9rem,3.5vw,1.15rem);
       line-height: 2;
     }
     .cal-row.nums .today {
@@ -122,81 +149,75 @@
     }
     .cal-month {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(1.3rem, 5vw, 1.7rem);
+      font-size: clamp(1.3rem,5vw,1.7rem);
       color: var(--burgundy);
       margin-top: 2px;
     }
-
     .hero-invite {
-      font-size: clamp(.68rem, 2.5vw, .82rem);
+      font-size: clamp(.68rem,2.5vw,.82rem);
       line-height: 1.75;
-      color: var(--text);
       margin-top: clamp(14px,4vw,22px);
     }
 
-    /* ════════════════════════════════════
-       СЕКЦИЯ 2 · ПРОГРАММА
-    ════════════════════════════════════ */
+    /* ══════════════════════════════════════════
+       ПРОГРАММА
+    ══════════════════════════════════════════ */
     .program-section {
       background: var(--cream);
       padding: clamp(28px,7vw,48px) clamp(16px,5vw,24px) 0;
     }
     .section-script {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(1.8rem, 7vw, 2.6rem);
+      font-size: clamp(1.8rem,7vw,2.6rem);
       color: var(--burgundy);
       margin-bottom: clamp(14px,4vw,22px);
     }
-
     .program-photo-wrap {
       position: relative;
       margin: 0 clamp(-24px,-5vw,-16px);
+      overflow: hidden;
     }
     .program-photo {
-      width: 100%;
-      display: block;
+      width: 100%; display: block;
       aspect-ratio: 3/4;
-      object-fit: cover;
-      object-position: center top;
+      object-fit: cover; object-position: center top;
       filter: grayscale(25%) brightness(.82);
+      transition: transform 1.2s cubic-bezier(.22,.61,.36,1);
     }
+    .program-photo-wrap:hover .program-photo { transform: scale(1.03); }
     .schedule-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
       justify-content: center;
       padding: clamp(16px,5vw,28px) clamp(14px,5vw,24px);
       gap: clamp(10px,3vw,18px);
     }
     .sched-row {
-      display: flex;
-      align-items: baseline;
+      display: flex; align-items: baseline;
       gap: clamp(10px,3vw,18px);
+      opacity: 0; transform: translateX(-20px);
+      transition: opacity .6s ease, transform .6s ease;
     }
+    .sched-row.visible { opacity: 1; transform: translateX(0); }
     .sched-time {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.1rem, 4.5vw, 1.6rem);
+      font-size: clamp(1.1rem,4.5vw,1.6rem);
       color: rgba(255,255,255,.92);
       font-style: italic;
       min-width: clamp(48px,13vw,68px);
     }
     .sched-event {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(.58rem, 2vw, .75rem);
+      font-size: clamp(.58rem,2vw,.75rem);
       font-weight: 500;
       letter-spacing: .12em;
       color: rgba(255,255,255,.92);
       text-transform: uppercase;
     }
-
-    /* This is love — правый край поверх фото */
     .this-is-love {
       position: absolute;
       right: clamp(-8px,-2vw,0px);
       bottom: clamp(10px,4vw,24px);
-      display: flex;
-      flex-direction: column;
+      display: flex; flex-direction: column;
       align-items: flex-end;
       transform: rotate(-8deg);
       transform-origin: bottom right;
@@ -204,15 +225,15 @@
     }
     .this-is-love span {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(.8rem, 3vw, 1.1rem);
+      font-size: clamp(.8rem,3vw,1.1rem);
       color: var(--rose);
       line-height: 1.6;
       white-space: nowrap;
     }
 
-    /* ════════════════════════════════════
-       СЕКЦИЯ 2б · МЕСТО ПРОВЕДЕНИЯ
-    ════════════════════════════════════ */
+    /* ══════════════════════════════════════════
+       МЕСТО
+    ══════════════════════════════════════════ */
     .venue-section {
       background: var(--cream);
       padding: clamp(28px,7vw,48px) clamp(16px,5vw,24px);
@@ -220,210 +241,234 @@
     }
     .venue-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(.95rem, 3.5vw, 1.1rem);
-      font-weight: 500;
-      margin-bottom: 6px;
+      font-size: clamp(.95rem,3.5vw,1.1rem);
+      font-weight: 500; margin-bottom: 6px;
     }
     .venue-address {
-      font-size: clamp(.75rem, 2.8vw, .88rem);
+      font-size: clamp(.75rem,2.8vw,.88rem);
       line-height: 1.65;
       margin-bottom: clamp(16px,5vw,24px);
     }
     .btn-map {
       display: inline-block;
-      background: var(--burgundy);
-      color: #fff;
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(.72rem, 2.5vw, .82rem);
-      font-weight: 400;
-      letter-spacing: .04em;
+      background: var(--burgundy); color: #fff;
+      font-size: clamp(.72rem,2.5vw,.82rem);
+      font-weight: 400; letter-spacing: .04em;
       padding: clamp(11px,3vw,14px) clamp(28px,8vw,40px);
-      border-radius: 50px;
-      text-decoration: none;
-      transition: opacity .2s;
+      border-radius: 50px; text-decoration: none;
+      transition: opacity .2s, transform .2s;
     }
-    .btn-map:hover { opacity: .82; }
+    .btn-map:hover { opacity: .82; transform: scale(1.03); }
+    .btn-map:active { transform: scale(.97); }
 
-    /* ════════════════════════════════════
-       СЕКЦИЯ 3 · ДРЕСС-КОД
-    ════════════════════════════════════ */
+    /* ══════════════════════════════════════════
+       ДРЕСС-КОД
+    ══════════════════════════════════════════ */
     .dresscode-photo {
-      width: 100%;
-      display: block;
+      width: 100%; display: block;
       aspect-ratio: 4/3;
-      object-fit: cover;
-      object-position: center 30%;
+      object-fit: cover; object-position: center 30%;
+      transition: transform 1s cubic-bezier(.22,.61,.36,1);
     }
+    .dresscode-wrap { overflow: hidden; }
+    .dresscode-wrap:hover .dresscode-photo { transform: scale(1.03); }
     .dresscode-content {
       background: var(--cream);
       padding: clamp(24px,6vw,36px) clamp(16px,5vw,24px) clamp(32px,8vw,48px);
       text-align: center;
     }
     .dresscode-text {
-      font-size: clamp(.72rem, 2.5vw, .85rem);
+      font-size: clamp(.72rem,2.5vw,.85rem);
       line-height: 1.7;
       margin-bottom: clamp(20px,5vw,30px);
     }
     .palette {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3,1fr);
       gap: clamp(12px,4vw,20px) clamp(8px,3vw,14px);
-      max-width: 300px;
-      margin: 0 auto;
+      max-width: 300px; margin: 0 auto;
     }
-    .swatch {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
+    .swatch { display: flex; flex-direction: column; align-items: center; gap: 6px; }
     .swatch-circle {
       width: clamp(48px,14vw,68px);
       height: clamp(48px,14vw,68px);
       border-radius: 50%;
       box-shadow: 0 2px 10px rgba(0,0,0,.13);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .swatch:hover .swatch-circle {
+      transform: scale(1.12) translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.18);
     }
     .swatch-label {
-      font-size: clamp(.55rem, 1.8vw, .67rem);
+      font-size: clamp(.55rem,1.8vw,.67rem);
       color: var(--grey);
-      letter-spacing: .02em;
     }
 
-    /* ════════════════════════════════════
-       СЕКЦИЯ 3б · ГАЛЕРЕЯ
-    ════════════════════════════════════ */
-    .gallery-section {
+    /* ══════════════════════════════════════════
+       КАРУСЕЛЬ
+    ══════════════════════════════════════════ */
+    .carousel-section {
       background: var(--cream);
-      padding: clamp(28px,7vw,44px) clamp(16px,5vw,24px);
+      padding: clamp(28px,7vw,44px) 0 clamp(32px,8vw,48px);
     }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(6px,2vw,10px);
-      margin-top: clamp(18px,5vw,28px);
+    .carousel-section .section-script {
+      padding: 0 clamp(16px,5vw,24px);
+      margin-bottom: clamp(18px,5vw,28px);
     }
-    .gallery-item {
-      aspect-ratio: 3/4;
+    .carousel-track-wrap {
       overflow: hidden;
-      border-radius: clamp(4px,1.5vw,8px);
-      cursor: pointer;
       position: relative;
+      cursor: grab;
+      user-select: none;
     }
-    .gallery-item img {
+    .carousel-track-wrap:active { cursor: grabbing; }
+    .carousel-track {
+      display: flex;
+      transition: transform .55s cubic-bezier(.25,.46,.45,.94);
+      will-change: transform;
+    }
+    .carousel-slide {
+      flex: 0 0 100%;
+      padding: 0 clamp(16px,5vw,24px);
+      pointer-events: none;
+    }
+    .carousel-slide img {
       width: 100%;
-      height: 100%;
+      aspect-ratio: 3/4;
       object-fit: cover;
-      object-position: center;
-      transition: transform .4s ease;
+      border-radius: clamp(8px,2.5vw,16px);
       display: block;
+      box-shadow: 0 12px 40px rgba(42,21,21,.18);
+      pointer-events: none;
     }
-    .gallery-item:hover img { transform: scale(1.04); }
+
+    /* Точки-индикаторы */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: clamp(16px,4vw,22px);
+    }
+    .carousel-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #C4A882;
+      opacity: .4;
+      cursor: pointer;
+      transition: opacity .3s, transform .3s, width .3s;
+    }
+    .carousel-dot.active {
+      opacity: 1;
+      width: 20px;
+      border-radius: 3px;
+      background: var(--burgundy);
+    }
+
+    /* Стрелки */
+    .carousel-arrows {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: clamp(12px,3vw,18px);
+      padding: 0 clamp(16px,5vw,24px);
+    }
+    .carousel-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid #C4A882;
+      background: transparent;
+      color: var(--text);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, border-color .2s, transform .15s;
+    }
+    .carousel-btn:hover {
+      background: var(--burgundy);
+      border-color: var(--burgundy);
+      color: #fff;
+    }
+    .carousel-btn:active { transform: scale(.92); }
 
     /* Лайтбокс */
     .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.88);
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.92);
       z-index: 1000;
-      align-items: center;
-      justify-content: center;
+      align-items: center; justify-content: center;
       padding: 16px;
+      opacity: 0;
+      transition: opacity .3s;
     }
     .lightbox.open { display: flex; }
+    .lightbox.show { opacity: 1; }
     .lightbox img {
-      max-width: 100%;
-      max-height: 90vh;
+      max-width: 100%; max-height: 90vh;
       object-fit: contain;
-      border-radius: 4px;
+      border-radius: 6px;
+      transform: scale(.93);
+      transition: transform .35s cubic-bezier(.22,.61,.36,1);
     }
+    .lightbox.show img { transform: scale(1); }
     .lightbox-close {
       position: absolute;
       top: 16px; right: 20px;
-      font-size: 2rem;
-      color: #fff;
-      cursor: pointer;
-      line-height: 1;
-      opacity: .8;
+      font-size: 2rem; color: #fff;
+      cursor: pointer; line-height: 1; opacity: .7;
+      transition: opacity .2s, transform .2s;
     }
-    .lightbox-close:hover { opacity: 1; }
+    .lightbox-close:hover { opacity: 1; transform: scale(1.1); }
 
-    /* Placeholder если фото нет */
-    .gallery-placeholder {
-      width: 100%;
-      height: 100%;
-      background: #E0D6C8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .7rem;
-      color: #999;
-      letter-spacing: .05em;
-    }
-
-    /* ════════════════════════════════════
-       СЕКЦИЯ 4 · НЕСКОЛЬКО ДЕТАЛЕЙ
-       Всё поверх фото — фото = фон секции
-    ════════════════════════════════════ */
-    .details-section {
-      position: relative;
-    }
+    /* ══════════════════════════════════════════
+       ДЕТАЛИ (фото = фон всей секции)
+    ══════════════════════════════════════════ */
+    .details-section { position: relative; }
     .details-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      filter: brightness(.92) saturate(.6);
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      filter: brightness(.9) saturate(.6);
       z-index: 0;
     }
-    /* светлый overlay чтобы текст читался */
     .details-section::after {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: rgba(245,237,224,.55);
       z-index: 1;
     }
     .details-inner {
-      position: relative;
-      z-index: 2;
+      position: relative; z-index: 2;
       padding: clamp(28px,7vw,44px) clamp(16px,5vw,24px) clamp(32px,8vw,48px);
     }
     .details-title {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(2rem, 8vw, 2.8rem);
+      font-size: clamp(2rem,8vw,2.8rem);
       color: var(--burgundy);
       margin-bottom: clamp(18px,5vw,28px);
     }
-    .detail-block {
-      margin-bottom: clamp(18px,5vw,26px);
-    }
+    .detail-block { margin-bottom: clamp(18px,5vw,26px); }
     .detail-block:last-child { margin-bottom: 0; }
     .detail-block h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(.95rem, 3.5vw, 1.1rem);
-      font-weight: 500;
-      margin-bottom: 6px;
-      color: var(--text);
+      font-size: clamp(.95rem,3.5vw,1.1rem);
+      font-weight: 500; margin-bottom: 6px;
     }
     .detail-block p {
-      font-size: clamp(.72rem, 2.5vw, .82rem);
+      font-size: clamp(.72rem,2.5vw,.82rem);
       line-height: 1.78;
-      color: var(--text);
     }
 
-    /* ════════════════════════════════════
-       СЕКЦИЯ 5 · RSVP
-    ════════════════════════════════════ */
+    /* ══════════════════════════════════════════
+       RSVP
+    ══════════════════════════════════════════ */
     .rsvp-section {
       background: var(--cream);
       padding: clamp(32px,8vw,52px) clamp(16px,5vw,24px) clamp(40px,10vw,60px);
       text-align: center;
     }
     .rsvp-subtitle {
-      font-size: clamp(.72rem, 2.5vw, .83rem);
+      font-size: clamp(.72rem,2.5vw,.83rem);
       line-height: 1.75;
       margin-bottom: clamp(24px,6vw,36px);
     }
@@ -431,32 +476,26 @@
     .form-block { margin-bottom: clamp(14px,4vw,20px); }
     .form-label {
       display: block;
-      font-size: clamp(.72rem, 2.5vw, .82rem);
+      font-size: clamp(.72rem,2.5vw,.82rem);
       margin-bottom: 8px;
-      color: var(--text);
     }
-    .form-input,
-    .form-textarea {
-      width: 100%;
-      background: #fff;
+    .form-input, .form-textarea {
+      width: 100%; background: #fff;
       border: 1.5px solid #D4C8BA;
       border-radius: clamp(8px,3vw,14px);
       padding: clamp(11px,3vw,15px) clamp(12px,4vw,18px);
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(.78rem, 2.8vw, .88rem);
-      font-weight: 300;
-      color: var(--text);
+      font-size: clamp(.78rem,2.8vw,.88rem);
+      font-weight: 300; color: var(--text);
       outline: none;
-      transition: border-color .2s;
+      transition: border-color .25s, box-shadow .25s;
     }
-    .form-input:focus,
-    .form-textarea:focus { border-color: var(--burgundy); }
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--burgundy);
+      box-shadow: 0 0 0 3px rgba(123,26,58,.08);
+    }
     .form-textarea { resize: none; min-height: 54px; }
-
-    .attendance-q {
-      font-size: clamp(.72rem, 2.5vw, .82rem);
-      margin-bottom: 10px;
-    }
+    .attendance-q { font-size: clamp(.72rem,2.5vw,.82rem); margin-bottom: 10px; }
     .radio-box {
       background: #fff;
       border: 1.5px solid #D4C8BA;
@@ -465,13 +504,13 @@
       margin-bottom: clamp(14px,4vw,20px);
     }
     .radio-opt {
-      display: flex;
-      align-items: center;
+      display: flex; align-items: center;
       gap: clamp(8px,2.5vw,12px);
-      font-size: clamp(.72rem, 2.5vw, .82rem);
+      font-size: clamp(.72rem,2.5vw,.82rem);
       padding: clamp(6px,2vw,9px) 0;
       cursor: pointer;
       border-bottom: 1px solid #EDE4D8;
+      transition: background .15s;
     }
     .radio-opt:last-child { border-bottom: none; }
     .radio-opt input[type=radio] { display: none; }
@@ -479,137 +518,102 @@
       width: 8px; height: 8px;
       border-radius: 50%;
       background: var(--text);
-      flex-shrink: 0;
-      opacity: .55;
-      transition: background .15s, opacity .15s;
+      flex-shrink: 0; opacity: .45;
+      transition: background .2s, opacity .2s, transform .2s;
     }
-    .radio-opt input[type=radio]:checked ~ .radio-mark {
+    .radio-opt.selected .radio-mark {
       background: var(--burgundy);
       opacity: 1;
+      transform: scale(1.3);
     }
-
     .btn-submit {
-      display: block;
-      width: 100%;
-      background: var(--burgundy);
-      color: #fff;
+      display: block; width: 100%;
+      background: var(--burgundy); color: #fff;
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(.75rem, 2.5vw, .85rem);
-      font-weight: 400;
-      letter-spacing: .05em;
+      font-size: clamp(.75rem,2.5vw,.85rem);
+      font-weight: 400; letter-spacing: .05em;
       padding: clamp(13px,3.5vw,16px);
-      border: none;
-      border-radius: 50px;
+      border: none; border-radius: 50px;
       cursor: pointer;
       margin-top: clamp(18px,5vw,28px);
-      transition: opacity .2s;
+      transition: opacity .2s, transform .15s, box-shadow .2s;
     }
-    .btn-submit:hover { opacity: .82; }
-
-    .form-success {
-      display: none;
-      padding: 20px 0;
-      text-align: center;
+    .btn-submit:hover {
+      opacity: .88;
+      box-shadow: 0 8px 24px rgba(123,26,58,.25);
     }
+    .btn-submit:active { transform: scale(.97); }
+    .form-success { display: none; padding: 20px 0; text-align: center; }
     .form-success.show { display: block; }
     .form-success p {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(1.8rem, 7vw, 2.4rem);
+      font-size: clamp(1.8rem,7vw,2.4rem);
       color: var(--burgundy);
     }
 
-    /* ════════════════════════════════════
-       СЕКЦИЯ 6 · FOOTER
-    ════════════════════════════════════ */
-    .footer-section {
-      position: relative;
-    }
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    .footer-section { position: relative; overflow: hidden; }
     .footer-photo {
-      width: 100%;
-      display: block;
+      width: 100%; display: block;
       aspect-ratio: 16/9;
-      object-fit: cover;
-      object-position: center 20%;
+      object-fit: cover; object-position: center 20%;
+      transition: transform 1s cubic-bezier(.22,.61,.36,1);
     }
+    .footer-section:hover .footer-photo { transform: scale(1.03); }
     .footer-caption {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
       padding: 0 16px;
+      pointer-events: none;
     }
     .footer-caption span {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(1.6rem, 6vw, 2.4rem);
+      font-size: clamp(1.6rem,6vw,2.4rem);
       color: var(--burgundy);
       text-align: center;
-      text-shadow: 0 1px 12px rgba(245,237,224,.7);
+      text-shadow: 0 1px 12px rgba(245,237,224,.8);
     }
-
-    /* Контакты */
     .footer-contacts {
       background: var(--cream);
       padding: clamp(28px,7vw,40px) clamp(16px,5vw,24px) clamp(32px,8vw,48px);
       text-align: center;
     }
     .footer-contacts-grid {
-      display: flex;
-      justify-content: center;
+      display: flex; justify-content: center;
       gap: clamp(24px,8vw,48px);
       flex-wrap: wrap;
     }
     .contact-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 5px;
+    }
+    .contact-role {
+      font-size: clamp(.6rem,2vw,.7rem);
+      letter-spacing: .12em; text-transform: uppercase; color: var(--grey);
     }
     .contact-name {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(1.5rem, 5.5vw, 2rem);
-      color: var(--burgundy);
-      line-height: 1.1;
-    }
-    .contact-role {
-      font-size: clamp(.62rem, 2vw, .72rem);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-bottom: 4px;
+      font-size: clamp(1.5rem,5.5vw,2rem);
+      color: var(--burgundy); line-height: 1.1;
     }
     .contact-phone {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.5vw, 1.2rem);
-      color: var(--text);
-      text-decoration: none;
+      font-size: clamp(1rem,3.5vw,1.2rem);
+      color: var(--text); text-decoration: none;
       transition: color .2s;
     }
     .contact-phone:hover { color: var(--burgundy); }
     .footer-divider {
-      width: 40px;
-      height: 1px;
+      width: 40px; height: 1px;
       background: #C4A882;
       margin: clamp(20px,5vw,28px) auto;
       opacity: .6;
     }
     .footer-love {
-      font-size: clamp(.65rem, 2vw, .75rem);
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--grey);
-    }
-
-    /* ════════════════════════════════════
-       ДЕСКТОП — плашка вокруг карточки
-    ════════════════════════════════════ */
-    @media (min-width: 481px) {
-      html { display: flex; justify-content: center; align-items: flex-start; }
-      body {
-        margin: 32px auto;
-        border-radius: 4px;
-        min-height: auto;
-      }
+      font-size: clamp(.62rem,2vw,.72rem);
+      letter-spacing: .15em; text-transform: uppercase; color: var(--grey);
     }
   </style>
 </head>
@@ -617,9 +621,7 @@
 
 <!-- ════ HERO ════ -->
 <section class="hero">
-
-  <!-- Декор ветки (SVG) -->
-  <svg class="deco-branch" viewBox="0 0 160 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg class="deco-branch" viewBox="0 0 160 220" fill="none">
     <path d="M145 4 Q122 42 100 65 Q78 88 108 108 Q132 122 122 148 Q112 168 88 180" stroke="#C4A882" stroke-width="1.4" fill="none" stroke-linecap="round"/>
     <path d="M100 65 Q84 52 72 34" stroke="#C4A882" stroke-width="1" fill="none" stroke-linecap="round"/>
     <path d="M108 108 Q126 96 140 78" stroke="#C4A882" stroke-width="1" fill="none" stroke-linecap="round"/>
@@ -628,19 +630,15 @@
     <ellipse cx="141" cy="77" rx="7" ry="4" transform="rotate(22 141 77)" fill="#C4A882" opacity=".55"/>
     <ellipse cx="154" cy="122" rx="7" ry="4" transform="rotate(12 154 122)" fill="#C4A882" opacity=".55"/>
     <ellipse cx="106" cy="62" rx="5" ry="3" transform="rotate(-52 106 62)" fill="#C4A882" opacity=".45"/>
-    <ellipse cx="88" cy="178" rx="5" ry="3" transform="rotate(8 88 178)" fill="#C4A882" opacity=".45"/>
-    <!-- кольца вверху -->
     <circle cx="152" cy="8" r="7" stroke="#C4A882" stroke-width="1.2" fill="none"/>
     <circle cx="148" cy="4" r="5" stroke="#C4A882" stroke-width="1" fill="none"/>
   </svg>
 
-  <h1 class="hero-names">Мариясена<br/>Василий</h1>
+  <h1 class="hero-names reveal">Мариясена<br/>Василий</h1>
+  <img class="hero-photo reveal-scale delay-2" src="images/hero.jpg" alt="Мариясена и Василий" />
+  <p class="hero-subtitle reveal delay-1">мы женимся!</p>
 
-  <img class="hero-photo" src="images/hero.jpg" alt="Мариясена и Василий" />
-
-  <p class="hero-subtitle">мы женимся!</p>
-
-  <div class="calendar">
+  <div class="calendar reveal delay-2">
     <div class="cal-row days">
       <span>ПН</span><span>ВТ</span><span>СР</span><span>ЧТ</span><span>ПТ</span><span>СБ</span><span>ВС</span>
     </div>
@@ -650,129 +648,101 @@
     <p class="cal-month">August</p>
   </div>
 
-  <p class="hero-invite">
+  <p class="hero-invite reveal delay-3">
     Этот день невозможно представить без самых близких для нас людей, мы бы очень хотели, чтобы вы разделили его вместе с нами
   </p>
 </section>
 
 <!-- ════ ПРОГРАММА ════ -->
 <section class="program-section">
-  <p class="section-script">Программа торжества</p>
-
-  <div class="program-photo-wrap">
+  <p class="section-script reveal">Программа торжества</p>
+  <div class="program-photo-wrap reveal-scale">
     <img class="program-photo" src="images/program.jpg" alt="Программа" />
-
     <div class="schedule-overlay">
-      <div class="sched-row"><span class="sched-time">16.00</span><span class="sched-event">СБОР ГОСТЕЙ</span></div>
-      <div class="sched-row"><span class="sched-time">17.00</span><span class="sched-event">ЦЕРЕМОНИЯ</span></div>
-      <div class="sched-row"><span class="sched-time">17.50</span><span class="sched-event">БАНКЕТ</span></div>
-      <div class="sched-row"><span class="sched-time">23.00</span><span class="sched-event">ФИНАЛ</span></div>
+      <div class="sched-row delay-1"><span class="sched-time">16.00</span><span class="sched-event">СБОР ГОСТЕЙ</span></div>
+      <div class="sched-row delay-2"><span class="sched-time">17.00</span><span class="sched-event">ЦЕРЕМОНИЯ</span></div>
+      <div class="sched-row delay-3"><span class="sched-time">17.50</span><span class="sched-event">БАНКЕТ</span></div>
+      <div class="sched-row delay-4"><span class="sched-time">23.00</span><span class="sched-event">ФИНАЛ</span></div>
     </div>
-
     <div class="this-is-love">
-      <span>This</span>
-      <span>is love</span>
-      <span>This is love</span>
-      <span>This is love</span>
-      <span>This is love</span>
+      <span>This</span><span>is love</span><span>This is love</span><span>This is love</span><span>This is love</span>
     </div>
   </div>
 </section>
 
-<!-- ════ МЕСТО ПРОВЕДЕНИЯ ════ -->
+<!-- ════ МЕСТО ════ -->
 <section class="venue-section">
-  <p class="section-script">Место проведения</p>
-  <p class="venue-name">Лофт-площадка Депо</p>
-  <p class="venue-address">г. Якутск, ул. 50 лет Советской Армии, 1а</p>
-  <a href="https://yandex.ru/maps/?text=Якутск+ул.+50+лет+Советской+Армии+1а" target="_blank" class="btn-map">Посмотреть на карте</a>
+  <p class="section-script reveal">Место проведения</p>
+  <p class="venue-name reveal delay-1">Лофт-площадка Депо</p>
+  <p class="venue-address reveal delay-2">г. Якутск, ул. 50 лет Советской Армии, 1а</p>
+  <a href="https://yandex.ru/maps/?text=Якутск+ул.+50+лет+Советской+Армии+1а" target="_blank" class="btn-map reveal delay-3">Посмотреть на карте</a>
 </section>
 
 <!-- ════ ДРЕСС-КОД ════ -->
 <section>
-  <img class="dresscode-photo" src="images/dresscode.jpg" alt="Дресс-код" />
+  <div class="dresscode-wrap">
+    <img class="dresscode-photo reveal-scale" src="images/dresscode.jpg" alt="Дресс-код" />
+  </div>
   <div class="dresscode-content">
-    <p class="section-script">Дресс-код</p>
-    <p class="dresscode-text">Мы будем рады, если вы поддержите<br/>цветовую палитру нашей свадьбы</p>
+    <p class="section-script reveal">Дресс-код</p>
+    <p class="dresscode-text reveal delay-1">Мы будем рады, если вы поддержите<br/>цветовую палитру нашей свадьбы</p>
     <div class="palette">
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#8B9B5A;"></div>
-        <span class="swatch-label">olive</span>
-      </div>
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#5C6B35;"></div>
-        <span class="swatch-label">deep olive</span>
-      </div>
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#3D2B1F;"></div>
-        <span class="swatch-label">chocolite</span>
-      </div>
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#F0EAD8; border:1px solid #D4C8BA;"></div>
-        <span class="swatch-label">cream</span>
-      </div>
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#C47A80;"></div>
-        <span class="swatch-label">dusty rose</span>
-      </div>
-      <div class="swatch">
-        <div class="swatch-circle" style="background:#6B1E3C;"></div>
-        <span class="swatch-label">burgundy</span>
-      </div>
+      <div class="swatch reveal delay-1"><div class="swatch-circle" style="background:#8B9B5A;"></div><span class="swatch-label">olive</span></div>
+      <div class="swatch reveal delay-2"><div class="swatch-circle" style="background:#5C6B35;"></div><span class="swatch-label">deep olive</span></div>
+      <div class="swatch reveal delay-3"><div class="swatch-circle" style="background:#3D2B1F;"></div><span class="swatch-label">chocolite</span></div>
+      <div class="swatch reveal delay-4"><div class="swatch-circle" style="background:#F0EAD8;border:1px solid #D4C8BA;"></div><span class="swatch-label">cream</span></div>
+      <div class="swatch reveal delay-5"><div class="swatch-circle" style="background:#C47A80;"></div><span class="swatch-label">dusty rose</span></div>
+      <div class="swatch reveal delay-6"><div class="swatch-circle" style="background:#6B1E3C;"></div><span class="swatch-label">burgundy</span></div>
     </div>
   </div>
 </section>
 
-<!-- ════ ГАЛЕРЕЯ ════ -->
-<section class="gallery-section">
-  <p class="section-script">Наши моменты</p>
-  <div class="gallery-grid">
-    <div class="gallery-item" onclick="openLightbox('images/gallery1.jpg')">
-      <img src="images/gallery1.jpg" alt="Фото 1"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-      <div class="gallery-placeholder" style="display:none;">фото 1</div>
+<!-- ════ КАРУСЕЛЬ ════ -->
+<section class="carousel-section">
+  <p class="section-script reveal">Наши моменты</p>
+
+  <div class="carousel-track-wrap" id="carouselWrap">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in;" /></div>
+      <div class="carousel-slide"><img src="images/gallery2.jpg" alt="Фото 2" onclick="openLightbox(1)" style="cursor:zoom-in;" /></div>
+      <div class="carousel-slide"><img src="images/gallery3.jpg" alt="Фото 3" onclick="openLightbox(2)" style="cursor:zoom-in;" /></div>
+      <div class="carousel-slide"><img src="images/gallery4.jpg" alt="Фото 4" onclick="openLightbox(3)" style="cursor:zoom-in;" /></div>
     </div>
-    <div class="gallery-item" onclick="openLightbox('images/gallery2.jpg')">
-      <img src="images/gallery2.jpg" alt="Фото 2"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-      <div class="gallery-placeholder" style="display:none;">фото 2</div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('images/gallery3.jpg')">
-      <img src="images/gallery3.jpg" alt="Фото 3"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-      <div class="gallery-placeholder" style="display:none;">фото 3</div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('images/gallery4.jpg')">
-      <img src="images/gallery4.jpg" alt="Фото 4"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-      <div class="gallery-placeholder" style="display:none;">фото 4</div>
-    </div>
+  </div>
+
+  <div class="carousel-dots" id="carouselDots">
+    <div class="carousel-dot active" onclick="goTo(0)"></div>
+    <div class="carousel-dot" onclick="goTo(1)"></div>
+    <div class="carousel-dot" onclick="goTo(2)"></div>
+    <div class="carousel-dot" onclick="goTo(3)"></div>
+  </div>
+
+  <div class="carousel-arrows">
+    <button class="carousel-btn" onclick="prev()" aria-label="Назад">&#8592;</button>
+    <button class="carousel-btn" onclick="next()" aria-label="Вперёд">&#8594;</button>
   </div>
 </section>
 
 <!-- Лайтбокс -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-  <img id="lightboxImg" src="" alt="" />
+  <span class="lightbox-close">&times;</span>
+  <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()" />
 </div>
 
-<!-- ════ НЕСКОЛЬКО ДЕТАЛЕЙ ════ -->
-<!-- Фото = полный фон. Весь контент поверх -->
+<!-- ════ ДЕТАЛИ ════ -->
 <section class="details-section">
   <img class="details-bg" src="images/details.jpg" alt="" aria-hidden="true" />
   <div class="details-inner">
-    <p class="details-title">Несколько деталей</p>
-
-    <div class="detail-block">
+    <p class="details-title reveal">Несколько деталей</p>
+    <div class="detail-block reveal delay-1">
       <h3>Подарки</h3>
       <p>Ваши искренние пожелания мы сохраним в сердце, а в качестве подарка будем рады вкладу в наше будущее в конверте</p>
     </div>
-
-    <div class="detail-block">
+    <div class="detail-block reveal delay-2">
       <h3>Маленькие гости</h3>
       <p>Чтобы мы могли в полной мере насладиться вечером, мы решили провести праздник без маленьких детей. Надеемся на ваше понимание и будем рады видеть вас!</p>
     </div>
-
-    <div class="detail-block">
+    <div class="detail-block reveal delay-3">
       <h3>Пожелания</h3>
       <p>Просим поддержать наше решение провести этот праздник без традиционных выкриков «Горько!». Пусть наши поцелуи останутся личным моментом.</p>
     </div>
@@ -781,65 +751,39 @@
 
 <!-- ════ RSVP ════ -->
 <section class="rsvp-section">
-  <p class="section-script">Вы будете с нами?</p>
-  <p class="rsvp-subtitle">
-    Очень ждем вашего ответа<br/>
-    до 30 июня. Заполнить и отправить<br/>
-    ответ нужно каждому гостю
-  </p>
+  <p class="section-script reveal">Вы будете с нами?</p>
+  <p class="rsvp-subtitle reveal delay-1">Очень ждем вашего ответа<br/>до 30 июня. Заполнить и отправить<br/>ответ нужно каждому гостю</p>
 
-  <form class="rsvp-form" id="rsvpForm" onsubmit="submitForm(event)">
-
+  <form class="rsvp-form reveal delay-2" id="rsvpForm" onsubmit="submitForm(event)">
     <div class="form-block">
       <label class="form-label">ФИО</label>
       <input class="form-input" type="text" name="name" required />
     </div>
-
     <div class="form-block">
       <p class="attendance-q">Сможете ли вы прийти на нашу свадьбу?</p>
       <div class="radio-box">
-        <label class="radio-opt">
-          <input type="radio" name="attendance" value="yes" required />
-          <span class="radio-mark"></span>
-          <span>Да, смогу</span>
-        </label>
-        <label class="radio-opt">
-          <input type="radio" name="attendance" value="maybe" />
-          <span class="radio-mark"></span>
-          <span>Пока не уверен(а)</span>
-        </label>
-        <label class="radio-opt">
-          <input type="radio" name="attendance" value="no" />
-          <span class="radio-mark"></span>
-          <span>К сожалению, не смогу</span>
-        </label>
+        <label class="radio-opt"><input type="radio" name="attendance" value="yes" required /><span class="radio-mark"></span><span>Да, смогу</span></label>
+        <label class="radio-opt"><input type="radio" name="attendance" value="maybe" /><span class="radio-mark"></span><span>Пока не уверен(а)</span></label>
+        <label class="radio-opt"><input type="radio" name="attendance" value="no" /><span class="radio-mark"></span><span>К сожалению, не смогу</span></label>
       </div>
     </div>
-
     <div class="form-block">
       <label class="form-label">Комментарий</label>
       <textarea class="form-textarea" name="comment"></textarea>
     </div>
-
     <button type="submit" class="btn-submit">Отправить ответ</button>
   </form>
-
-  <div class="form-success" id="formSuccess">
-    <p>Спасибо! Ждём вас 💌</p>
-  </div>
+  <div class="form-success" id="formSuccess"><p>Спасибо! Ждём вас 💌</p></div>
 </section>
 
 <!-- ════ FOOTER ════ -->
 <section class="footer-section">
   <img class="footer-photo" src="images/footer.jpg" alt="Мариясена и Василий" />
-  <div class="footer-caption">
-    <span>Будем счастливы видеть Вас!</span>
-  </div>
+  <div class="footer-caption"><span>Будем счастливы видеть Вас!</span></div>
 </section>
 
-<!-- Контакты -->
 <footer class="footer-contacts">
-  <div class="footer-contacts-grid">
+  <div class="footer-contacts-grid reveal">
     <div class="contact-card">
       <span class="contact-role">невеста</span>
       <span class="contact-name">Мариясена</span>
@@ -852,39 +796,109 @@
     </div>
   </div>
   <div class="footer-divider"></div>
-  <p class="footer-love">С любовью — Мариясена и Василий</p>
+  <p class="footer-love reveal delay-2">С любовью — Мариясена и Василий</p>
 </footer>
 
 <script>
-  function openLightbox(src) {
-    document.getElementById('lightboxImg').src = src;
-    document.getElementById('lightbox').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+/* ═══════════════════════════════════════
+   КАРУСЕЛЬ
+═══════════════════════════════════════ */
+const track   = document.getElementById('carouselTrack');
+const dots    = document.querySelectorAll('.carousel-dot');
+const slides  = document.querySelectorAll('.carousel-slide');
+const gallery = ['images/gallery1.jpg','images/gallery2.jpg','images/gallery3.jpg','images/gallery4.jpg'];
+let cur = 0, autoTimer, startX = 0, isDragging = false, dragDelta = 0;
+const total = slides.length;
 
-  function submitForm(e) {
-    e.preventDefault();
+function goTo(n) {
+  cur = (n + total) % total;
+  track.style.transform = `translateX(-${cur * 100}%)`;
+  dots.forEach((d,i) => d.classList.toggle('active', i === cur));
+}
+function next() { goTo(cur + 1); resetAuto(); }
+function prev() { goTo(cur - 1); resetAuto(); }
+function resetAuto() { clearInterval(autoTimer); autoTimer = setInterval(next, 3800); }
+
+/* Свайп (touch) */
+const wrap = document.getElementById('carouselWrap');
+wrap.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDragging = true; }, {passive:true});
+wrap.addEventListener('touchmove',  e => { if(isDragging) dragDelta = e.touches[0].clientX - startX; }, {passive:true});
+wrap.addEventListener('touchend',   () => {
+  if(Math.abs(dragDelta) > 40) dragDelta < 0 ? next() : prev();
+  isDragging = false; dragDelta = 0;
+});
+
+/* Свайп (mouse) */
+wrap.addEventListener('mousedown', e => { startX = e.clientX; isDragging = true; });
+wrap.addEventListener('mousemove', e => { if(isDragging) dragDelta = e.clientX - startX; });
+wrap.addEventListener('mouseup',   () => {
+  if(Math.abs(dragDelta) > 40) dragDelta < 0 ? next() : prev();
+  isDragging = false; dragDelta = 0;
+});
+wrap.addEventListener('mouseleave', () => { isDragging = false; dragDelta = 0; });
+
+resetAuto();
+
+/* ═══════════════════════════════════════
+   ЛАЙТБОКС
+═══════════════════════════════════════ */
+const lb    = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightboxImg');
+
+function openLightbox(idx) {
+  lbImg.src = gallery[idx];
+  lb.classList.add('open');
+  requestAnimationFrame(() => lb.classList.add('show'));
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  lb.classList.remove('show');
+  setTimeout(() => { lb.classList.remove('open'); document.body.style.overflow = ''; }, 300);
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+
+/* ═══════════════════════════════════════
+   APPLE SCROLL АНИМАЦИИ
+═══════════════════════════════════════ */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      /* расписание — запускаем дочерние строки */
+      if (entry.target.classList.contains('reveal-scale')) {
+        entry.target.querySelectorAll('.sched-row').forEach(row => {
+          row.classList.add('visible');
+        });
+      }
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -32px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-scale, .reveal-left').forEach(el => {
+  observer.observe(el);
+});
+
+/* ═══════════════════════════════════════
+   ФОРМА
+═══════════════════════════════════════ */
+document.querySelectorAll('.radio-opt').forEach(opt => {
+  opt.addEventListener('click', () => {
+    opt.closest('.radio-box').querySelectorAll('.radio-opt').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+  });
+});
+
+function submitForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn-submit');
+  btn.textContent = '✓ Отправлено';
+  btn.style.background = '#4A7C4A';
+  setTimeout(() => {
     document.getElementById('rsvpForm').style.display = 'none';
     document.getElementById('formSuccess').classList.add('show');
-  }
-
-  /* radio — визуально обновляем точку */
-  document.querySelectorAll('.radio-opt').forEach(opt => {
-    opt.addEventListener('click', () => {
-      opt.closest('.radio-box').querySelectorAll('.radio-mark').forEach(m => {
-        m.style.background = 'var(--text)';
-        m.style.opacity = '.55';
-      });
-      opt.querySelector('.radio-mark').style.background = 'var(--burgundy)';
-      opt.querySelector('.radio-mark').style.opacity = '1';
-    });
-  });
+  }, 600);
+}
 </script>
-
 </body>
 </html>
