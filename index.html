@@ -3,7 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Мариясена & Василий</title>
+
+  <!-- ─────────── SEO ─────────── -->
+  <title>Мариясена & Василий — приглашение на свадьбу · 1 августа 2026</title>
+  <meta name="description" content="Свадебное приглашение Мариясены и Василия. 1 августа 2026, Лофт-площадка «Депо», Якутск. Программа дня, дресс-код и подтверждение присутствия." />
+  <meta name="keywords" content="свадьба, приглашение, Мариясена, Василий, 1 августа 2026, Якутск, Депо, RSVP" />
+  <meta name="author" content="Мариясена и Василий" />
+  <meta name="theme-color" content="#7B1A3A" />
+  <link rel="canonical" href="https://vmwed.ru/" />
+
+  <!-- Open Graph (для соцсетей и мессенджеров) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:site_name" content="Мариясена & Василий" />
+  <meta property="og:title" content="Мариясена & Василий — приглашение на свадьбу" />
+  <meta property="og:description" content="1 августа 2026 · Лофт-площадка «Депо», Якутск. Будем счастливы видеть вас!" />
+  <meta property="og:url" content="https://vmwed.ru/" />
+  <meta property="og:image" content="https://vmwed.ru/images/hero.jpg" />
+  <meta property="og:image:alt" content="Мариясена и Василий" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Мариясена & Василий — приглашение на свадьбу" />
+  <meta name="twitter:description" content="1 августа 2026 · Лофт-площадка «Депо», Якутск." />
+  <meta name="twitter:image" content="https://vmwed.ru/images/hero.jpg" />
+
+  <!-- Favicon «VM» -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <!-- Vollkorn (Google Fonts) для основного текста; Marianna подключается локально через @font-face -->
@@ -135,7 +163,7 @@
       margin-bottom: clamp(8px,3vw,14px);
       position: relative; z-index: 2;
       width: fit-content;
-      text-align: left;          /* «Василий» прижат влево под «Мариясена» */
+      text-align: right;         /* «Василий» прижат вправо под «Мариясена» */
       padding-left: clamp(6px,3vw,18px);
     }
     /* обёртка фото — обрезает нижнюю чёрную полоску + alpha-маска углов */
@@ -254,9 +282,7 @@
       aspect-ratio: 4/3;
       object-fit: cover; object-position: center center;
       filter: grayscale(25%) brightness(.82);
-      transition: transform 1.2s cubic-bezier(.22,.61,.36,1);
     }
-    .program-photo-wrap:hover .program-photo { transform: scale(1.03); }
     .schedule-overlay {
       position: absolute; inset: 0;
       display: flex; flex-direction: column;
@@ -265,22 +291,10 @@
       padding: clamp(16px,5vw,28px) clamp(14px,5vw,24px);
       gap: clamp(8px,2.5vw,14px);
     }
-    /* матовые стеклянные плашки расписания */
     .sched-row {
       display: flex; align-items: baseline;
       gap: clamp(10px,3vw,18px);
-      width: fit-content;
-      padding: clamp(7px,2.2vw,11px) clamp(14px,4vw,22px);
-      background: rgba(30,16,16,.22);
-      -webkit-backdrop-filter: blur(8px) saturate(1.2);
-      backdrop-filter: blur(8px) saturate(1.2);
-      border: 1px solid rgba(255,255,255,.22);
-      border-radius: 999px;
-      opacity: 0; transform: translateX(-20px);
-      transition: opacity .6s ease, transform .6s ease, box-shadow .3s ease;
     }
-    .sched-row.visible { opacity: 1; transform: translateX(0); }
-    .sched-row:hover { box-shadow: 0 8px 24px rgba(0,0,0,.22); }
     .sched-time {
       font-family: var(--font-head);
       font-size: clamp(1.5rem,6vw,2.1rem);
@@ -297,20 +311,20 @@
     }
     .this-is-love {
       position: absolute;
-      right: clamp(6px,3vw,18px);
-      bottom: clamp(12px,5vw,28px);
+      right: clamp(16px,6vw,40px);
+      bottom: clamp(28px,10vw,64px);
       display: flex; flex-direction: column;
       align-items: flex-end;
-      transform: rotate(-90deg);
+      transform: rotate(-45deg);
       transform-origin: bottom right;
       pointer-events: none;
-      z-index: 3;
+      z-index: 50;            /* поверх всех компонентов */
     }
     .this-is-love span {
       font-family: var(--font-head);
-      font-size: clamp(.8rem,3vw,1.1rem);
+      font-size: clamp(1.1rem,4vw,1.5rem);
       color: var(--rose);
-      line-height: 1.6;
+      line-height: 1.5;
       white-space: nowrap;
     }
 
@@ -357,6 +371,7 @@
     .dresscode-wrap:hover .dresscode-photo { transform: scale(1.03); }
     .dresscode-content {
       background: var(--cream);
+      margin-top: clamp(24px,7vw,40px);   /* отступ от фото галереи */
       padding: clamp(24px,6vw,36px) clamp(16px,5vw,24px) clamp(32px,8vw,48px);
       text-align: center;
     }
@@ -1012,19 +1027,19 @@
 
 <!-- ════ ПРОГРАММА ════ -->
 <section class="program-section">
-  <p class="section-script reveal">Программа торжества</p>
-  <div class="program-photo-wrap reveal-scale">
+  <p class="section-script">Программа торжества</p>
+  <div class="program-photo-wrap">
     <div class="program-photo-clip">
       <img class="program-photo" src="images/program.jpg" alt="Программа" />
     </div>
     <div class="schedule-overlay">
-      <div class="sched-row delay-1"><span class="sched-time">16.00</span><span class="sched-event">СБОР ГОСТЕЙ</span></div>
-      <div class="sched-row delay-2"><span class="sched-time">17.00</span><span class="sched-event">ЦЕРЕМОНИЯ</span></div>
-      <div class="sched-row delay-3"><span class="sched-time">17.50</span><span class="sched-event">БАНКЕТ</span></div>
-      <div class="sched-row delay-4"><span class="sched-time">23.00</span><span class="sched-event">ФИНАЛ</span></div>
+      <div class="sched-row"><span class="sched-time">16.00</span><span class="sched-event">СБОР ГОСТЕЙ</span></div>
+      <div class="sched-row"><span class="sched-time">17.00</span><span class="sched-event">ЦЕРЕМОНИЯ</span></div>
+      <div class="sched-row"><span class="sched-time">17.50</span><span class="sched-event">БАНКЕТ</span></div>
+      <div class="sched-row"><span class="sched-time">23.00</span><span class="sched-event">ФИНАЛ</span></div>
     </div>
     <div class="this-is-love">
-      <span>This</span><span>is love</span><span>This is love</span><span>This is love</span><span>This is love</span>
+      <span>This is love</span><span>This is love</span><span>This is love</span>
     </div>
   </div>
 </section>
@@ -1041,7 +1056,7 @@
 <section class="carousel-section">
   <div class="carousel-track-wrap" id="carouselWrap">
     <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in; object-position: 32% center;" /></div>
+      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in; object-position: calc(50% - 10px) center;" /></div>
       <div class="carousel-slide"><img src="images/gallery2.jpg" alt="Фото 2" onclick="openLightbox(1)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery3.jpg" alt="Фото 3" onclick="openLightbox(2)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery4.jpg" alt="Фото 4" onclick="openLightbox(3)" style="cursor:zoom-in;" /></div>
