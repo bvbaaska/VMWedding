@@ -82,7 +82,7 @@
 
     /* Заголовки на Marianna остаются прямыми (курсив только у Vollkorn) */
     .hero-names, .hero-subtitle, .cal-row.nums span, .cal-month,
-    .section-script, .sched-time, .this-is-love span,
+    .section-script, .sched-time,
     .details-title, .form-success p,
     .footer-heading, .contact-name, .contact-phone {
       font-style: normal;
@@ -315,25 +315,6 @@
       letter-spacing: .12em;
       color: rgba(255,255,255,.92);
       text-transform: uppercase;
-    }
-    .this-is-love {
-      position: absolute;
-      right: clamp(-18px,-5vw,-8px);
-      bottom: clamp(-10px,-3vw,-4px);
-      display: flex; flex-direction: column;
-      align-items: flex-end;
-      transform: rotate(-45deg);
-      transform-origin: bottom right;
-      pointer-events: none;
-      z-index: 50;            /* поверх всех компонентов */
-    }
-    .this-is-love span { letter-spacing: .12em; }   /* растянуть текст */
-    .this-is-love span {
-      font-family: var(--font-head);
-      font-size: clamp(1.1rem,4vw,1.5rem);
-      color: var(--rose);
-      line-height: 1.5;
-      white-space: nowrap;
     }
 
     /* ══════════════════════════════════════════
@@ -885,16 +866,26 @@
       }
 
       /* — Общие отступы широких секций — */
-      .program-section, .venue-section, .carousel-section,
-      .details-section, .rsvp-section, .footer-section, .footer-contacts {
+      .venue-section, .carousel-section,
+      .rsvp-section, .footer-contacts {
         padding-left: clamp(48px,8vw,150px);
         padding-right: clamp(48px,8vw,150px);
       }
 
+      /* — Секции с фото на всю ширину: без боковых паддингов — */
+      .program-section, .details-section, .footer-section {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
       /* — ПРОГРАММА: широкий баннер — */
       .program-section { text-align: center; padding-top: clamp(50px,7vw,90px); }
+      .program-section .section-script {
+        padding-left: clamp(48px,8vw,150px);
+        padding-right: clamp(48px,8vw,150px);
+      }
       .section-script { font-size: clamp(2.6rem,4vw,4rem); }
-      .program-photo-wrap { margin: 0 auto; max-width: 1100px; border-radius: 8px; }
+      .program-photo-wrap { margin: 0; max-width: none; border-radius: 0; }
       .program-photo { aspect-ratio: 16/9; max-height: 78vh; object-position: center 35%; }
       .schedule-overlay {
         align-items: center;
@@ -959,7 +950,11 @@
       .rsvp-form { max-width: 560px; margin: 0 auto; }
 
       /* — FOOTER — */
-      .footer-heading { font-size: clamp(2.4rem,3.5vw,3.4rem); }
+      .footer-heading {
+        font-size: clamp(2.4rem,3.5vw,3.4rem);
+        padding-left: clamp(48px,8vw,150px);
+        padding-right: clamp(48px,8vw,150px);
+      }
       .footer-photo { aspect-ratio: 21/9; max-height: 70vh; }
       .footer-contacts { padding-bottom: clamp(50px,7vw,80px); }
       .contact-name { font-size: 2.4rem; }
@@ -1046,9 +1041,7 @@
       <div class="sched-row"><span class="sched-time">17.50</span><span class="sched-event">БАНКЕТ</span></div>
       <div class="sched-row"><span class="sched-time">23.00</span><span class="sched-event">ФИНАЛ</span></div>
     </div>
-    <div class="this-is-love">
-      <span>This is love</span><span>This is love</span><span>This is love</span>
-    </div>
+
   </div>
 </section>
 
@@ -1064,7 +1057,7 @@
 <section class="carousel-section">
   <div class="carousel-track-wrap" id="carouselWrap">
     <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in; object-position: calc(50% + 7px) center;" /></div>
+      <div class="carousel-slide"><img src="images/gallery1.jpg" alt="Фото 1" onclick="openLightbox(0)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery2.jpg" alt="Фото 2" onclick="openLightbox(1)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery3.jpg" alt="Фото 3" onclick="openLightbox(2)" style="cursor:zoom-in;" /></div>
       <div class="carousel-slide"><img src="images/gallery4.jpg" alt="Фото 4" onclick="openLightbox(3)" style="cursor:zoom-in;" /></div>
